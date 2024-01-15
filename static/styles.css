@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navbar-height: 48px;
+}
+* {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+}
+html, body {
+  width: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+body {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* AppContainer */
+#inner-container {
+  grid-template-rows: 1fr var(--navbar-height);
+  grid-template-areas:
+    "main"
+    "nav"
+}
+#inner-container main {
+  grid-area: main;
+}
+#inner-container nav {
+  grid-area: nav;
+}
+
+/* Article */
+article.ui {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+article.ui .info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+article.ui .info h1 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+article.ui .info h2 {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+article.ui .info h3 {
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+article.ui .info p {
+  font-size: 0.6rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+article.ui .info small {
+  font-size: 0.5rem;
+  font-weight: 200;
+  margin: 0;
+  padding: 0;
+}
+article.ui > p {
+  font-size: 1.33rem;
+  font-weight: 400;
+  margin: 0 0 1rem 0;
+  padding: 0;
+  text-align: left;
+  max-width: 90%;
+  max-height: 100%;
+}
+
+article.ui.catechism h1,
+article.ui.catechism p,
+article.ui.catechism small {
+  margin: 0 0 1rem 0;
+  padding: 0;
+  text-align: left;
+  width: 90%;
+  max-height: 100%;
+}
+article.ui.catechism h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+}
+article.ui.catechism p {
+  font-size: 1.33rem;
+  font-weight: 400;
+}
+article.ui.catechism small {
+  font-size: 0.5rem;
+  font-weight: 200;
+}
+
+/* Utils */
+.fill-available-height {
+  height: 100%;
+  height: -moz-available;
+  height: -webkit-fill-available;
+  height: fill-available;
+}
+.fill-available-width {
+  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+}
+.hide-scrollbars {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* For Firefox */
+}
+.hide-scrollbars::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari and Opera */
+}
+.no-interaction {
+  -ms-scroll-chaining: none;
+  overscroll-behavior: contain;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -ms-touch-action: none;
+  touch-action: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-overflow-style: none;
+}
+@keyframes moveUp {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+.flag-icon {
+  font-family: monospace;
+}
+[aria-hidden="true"], hidden, .hidden {
+  display: none;
+  visibility: hidden;
+}
+/* Give links pointing to the current page a green color */
+a[aria-current='page'] {
+  color:#a5f3fc;
+}
+.overscroll-touch {
+  -webkit-overflow-scrolling: touch;
+}

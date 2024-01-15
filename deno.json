@@ -1,0 +1,70 @@
+{
+  "exclude": [
+    ".git/**/*",
+    ".github/**/*",
+    ".vscode/**/*",
+    "**/_fresh/**/*",
+    "**/scratch/**/*",
+    "**/*.json",
+    "**/*.jsonc",
+    "**/*.md"
+  ],
+  "lock": false,
+  "fmt": {
+    "lineWidth": 120
+  },
+  "tasks": {
+    "clean": "npx rimraf ./_fresh",
+    "check": "deno fmt --check && deno lint && deno check --unstable-kv dev.ts",
+    "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
+    "manifest": "deno task cli manifest $(pwd)",
+    "start": "deno run -A --unstable --watch=static/,routes/ dev.ts",
+    "build": "deno run -A --unstable dev.ts build",
+    "preview": "deno run -A --unstable main.ts",
+    "update": "deno run -A -r https://fresh.deno.dev/update ."
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ],
+      "exclude": ["no-import-assertions"]
+    }
+  },
+  "imports": {
+    "$fresh/": "https://deno.land/x/fresh@1.6.1/",
+    "preact": "https://esm.sh/preact@10.19.2",
+    "preact/": "https://esm.sh/preact@10.19.2/",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
+    "tailwindcss": "npm:tailwindcss@3.4.0",
+    "tailwindcss/": "npm:/tailwindcss@3.4.0/",
+    "tailwindcss/plugin": "npm:/tailwindcss@3.4.0/plugin.js",
+    "@tailwindcss/forms": "npm:@tailwindcss/forms@0.5.7",
+    "$std/": "https://deno.land/std@0.208.0/",
+    "escape": "https://deno.land/x/escape@1.4.2/mod.ts",
+    "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/",
+    "@components/": "./components/",
+    "@db": "./db/db.ts",
+    "@data": "./db/data.ts",
+    "@islands/": "./islands/",
+    "@lib/": "./lib/",
+    "@static/": "./static/"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  },
+  "nodeModulesDir": true,
+  "deploy": {
+    "project": "7a27ec5c-40ee-4c1c-988b-63d476d01c6b",
+    "exclude": ["**/db/**/*.db"],
+    "include": [],
+    "entrypoint": "main.ts"
+  },
+  "githooks": {
+    "$schema": "https://deno.land/x/githooks/schema.json",
+    "pre-commit": "check"
+  }
+}
