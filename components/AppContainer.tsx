@@ -10,7 +10,7 @@ export default function AppContainer({ children }: AppContainerProps) {
     <div
       role="application"
       id="app-container"
-      className="no-interaction isolate block box-border antialiased w-dvw h-dvh max-w-lvw max-h-lvh min-w-svw min-h-svh"
+      className="no-interaction isolate block box-border antialiased w-full h-full max-w-lvw max-h-lvh min-w-svw min-h-svh"
       name={APP_NAME}
       aria-label={APP_NAME}
     >

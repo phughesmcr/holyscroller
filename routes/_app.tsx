@@ -93,7 +93,7 @@ export default function App({ Component }: PageProps) {
           href={"https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700;800&display=swap"}
         />
       </head>
-      <body className="no-interaction relative overflow-hidden bg-zinc-100 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-100">
+      <body className="no-interaction relative fill-available-height fill-available-width overflow-hidden bg-zinc-100 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-100">
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <Loader />
         <Onboarding />
