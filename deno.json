@@ -7,7 +7,8 @@
     "**/scratch/**/*",
     "**/*.json",
     "**/*.jsonc",
-    "**/*.md"
+    "**/*.md",
+    "**/_fresh/*"
   ],
   "lock": false,
   "fmt": {
@@ -29,20 +30,22 @@
         "fresh",
         "recommended"
       ],
-      "exclude": ["no-import-assertions"]
+      "exclude": [
+        "no-import-assertions"
+      ]
     }
   },
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.6.1/",
-    "preact": "https://esm.sh/preact@10.19.2",
-    "preact/": "https://esm.sh/preact@10.19.2/",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
-    "tailwindcss": "npm:tailwindcss@3.4.0",
-    "tailwindcss/": "npm:/tailwindcss@3.4.0/",
-    "tailwindcss/plugin": "npm:/tailwindcss@3.4.0/plugin.js",
+    "preact": "https://esm.sh/preact@10.19.3",
+    "preact/": "https://esm.sh/preact@10.19.3/",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
+    "tailwindcss": "npm:tailwindcss@3.4.1",
+    "tailwindcss/": "npm:/tailwindcss@3.4.1/",
+    "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js",
     "@tailwindcss/forms": "npm:@tailwindcss/forms@0.5.7",
-    "$std/": "https://deno.land/std@0.208.0/",
+    "$std/": "https://deno.land/std@0.212.0/",
     "escape": "https://deno.land/x/escape@1.4.2/mod.ts",
     "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/",
     "@components/": "./components/",
@@ -59,7 +62,9 @@
   "nodeModulesDir": true,
   "deploy": {
     "project": "7a27ec5c-40ee-4c1c-988b-63d476d01c6b",
-    "exclude": ["**/db/**/*.db"],
+    "exclude": [
+      "**/db/**/*.db"
+    ],
     "include": [],
     "entrypoint": "main.ts"
   },
