@@ -112,6 +112,13 @@ export function conformCursor(params: URLSearchParams): string | undefined | nul
   return cleanedCursor;
 }
 
+export function conformResume(params: URLSearchParams): boolean | null {
+  const resume = params.get(SQ_KEYS.RESUME);
+  if (!resume) return null;
+  const cleanedResume = escapeSql(resume.trim());
+  return cleanedResume === "1";
+}
+
 export function getApiParamsFromUrl(url: string | URL): ApiParams {
   const { searchParams } = new URL(url);
   const translation = conformTranslation(searchParams) || API_DEFAULT_TRANSLATION;
@@ -119,7 +126,8 @@ export function getApiParamsFromUrl(url: string | URL): ApiParams {
   const startFrom = conformStartFrom(searchParams) || undefined;
   const endAt = conformEndAt(searchParams) || undefined;
   const cursor = conformCursor(searchParams) || undefined;
-  return { translation, startFrom, endAt, cursor, pageSize };
+  const resume = conformResume(searchParams) || false;
+  return { translation, startFrom, endAt, cursor, pageSize, resume };
 }
 
 export function setApiParamsInUrl(url: string | URL, params: ApiParams): URL {
@@ -141,18 +149,20 @@ export function setApiParamsInUrl(url: string | URL, params: ApiParams): URL {
 }
 
 export function cleanParams(params: ApiParams): ApiParams {
-  const { translation, startFrom, endAt, pageSize, cursor } = params;
+  const { translation, startFrom, endAt, pageSize, cursor, resume } = params;
   const cleanedTranslation = translation ? escapeSql(translation) : API_DEFAULT_TRANSLATION;
   const cleanedPageSize = parseInt(escapeSql((pageSize || API_DEFAULT_PAGE_SIZE).toString()), 10);
   const cleanedStartFrom = startFrom ? parseInt(escapeSql(startFrom.toString()), 10) : undefined;
   const cleanedEndAt = endAt ? parseInt(escapeSql(endAt.toString()), 10) : undefined;
   const cleanedCursor = cursor ? escapeSql(cursor) : undefined;
+  const cleanedResume = resume ? (resume as unknown === "true" || !!+resume) : false;
   return {
     translation: cleanedTranslation as Translation,
     pageSize: cleanedPageSize,
     startFrom: cleanedStartFrom,
     endAt: cleanedEndAt,
     cursor: cleanedCursor,
+    resume: cleanedResume,
   };
 }
 
@@ -291,5 +301,6 @@ export function deleteInessentialsFromUrl(url: URL | string): URL {
   newUrl.searchParams.delete(SQ_KEYS.CURSOR);
   newUrl.searchParams.delete(SQ_KEYS.INDEX);
   newUrl.searchParams.delete(SQ_KEYS.CURRENT);
+  newUrl.searchParams.delete(SQ_KEYS.RESUME);
   return newUrl;
 }

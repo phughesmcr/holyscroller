@@ -41,6 +41,15 @@ export const enum KV_PATHS {
 
 export const enum LS_KEYS {
   ONBOARD = "hs-onboard",
+  // PARAMS
+  TRANSLATION = "hs-translation",
+  PAGE_SIZE = "hs-page-size",
+  START_FROM = "hs-start-from",
+  END_AT = "hs-end-at",
+  CURSOR = "hs-cursor",
+  
+  INDEX = "hs-index",
+  CURRENT = "hs-current",
 }
 
 export const enum SQ_KEYS {
@@ -51,6 +60,7 @@ export const enum SQ_KEYS {
   CURSOR = "cr",
   INDEX = "ix",
   CURRENT = "cv",
+  RESUME = "rs",
 }
 
 export const NOOP_CURSOR = "-1" as const;

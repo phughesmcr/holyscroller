@@ -1,3 +1,4 @@
+import { getPericopesForBook } from "@data";
 import {
   API_DEFAULT_ID,
   API_DEFAULT_PAGE_SIZE,
@@ -11,14 +12,14 @@ import {
 import type { ApiParams, Pericope, Translation, VerseId } from "@lib/types.ts";
 import { clamp, getApiParamsFromUrl, getRefFromId } from "@lib/utils.ts";
 import { computed, signal } from "@preact/signals";
-import { getPericopesForBook } from "@data";
 
 // URL based state
 
 export const $currentUrl = signal<URL | null>(null);
 
 export const $currentParams = computed<ApiParams | null>(() => {
-  return $currentUrl.value ? getApiParamsFromUrl($currentUrl.value) : null;
+  const value = $currentUrl.value;
+  return value ? getApiParamsFromUrl(value) : null;
 });
 
 export const $currentTranslation = computed<Translation>(() =>

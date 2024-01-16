@@ -1,4 +1,4 @@
-import { IS_BROWSER, Partial } from "$fresh/runtime.ts";
+import { Partial } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import AppContainer from "@components/AppContainer.tsx";
 import { TopFade } from "@components/TopFade.tsx";
@@ -6,13 +6,7 @@ import { getExtrasForVerses, getPageOfVerses } from "@db";
 import Carousel from "@islands/Carousel.tsx";
 import { $currentUrl, $currentVerse } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, Verse, VerseId } from "@lib/types.ts";
-import {
-  createPartialFeedUrls,
-  getApiParamsFromUrl,
-  getIdFromKvEntry,
-  memoizeWithLimitedHistory,
-  memoizeWithLocalStorage,
-} from "@lib/utils.ts";
+import { createPartialFeedUrls, getApiParamsFromUrl, getIdFromKvEntry, memoizeWithLimitedHistory } from "@lib/utils.ts";
 import NavBar from "../../islands/NavBar.tsx";
 import Toolbar from "../../islands/Toolbar/Toolbar.tsx";
 
@@ -38,11 +32,9 @@ const createResponse = async (url: string): Promise<ApiResponse> => {
   return { ...params, verses, extras, next, origin: currentUrl };
 };
 
-const createResponseMemoized = IS_BROWSER
-  ? memoizeWithLocalStorage(createResponse)
-  : memoizeWithLimitedHistory(createResponse, 25);
+const createResponseMemoized = memoizeWithLimitedHistory(createResponse, 25);
 
-export const handler: Handlers<ApiResponse> = {
+export const handler: Handlers<ApiResponse | null> = {
   async GET(req, ctx) {
     try {
       const res = await createResponseMemoized(req.url.toString());
@@ -59,7 +51,7 @@ export default function Bible(props: PageProps<ApiResponse>) {
   const { data, url } = props;
 
   // update signals based on response
-  $currentUrl.value = new URL(url);
+  // $currentUrl.value = new URL(url);
   $currentVerse.value = data.verses[0][0] as VerseId;
 
   return (
@@ -68,7 +60,7 @@ export default function Bible(props: PageProps<ApiResponse>) {
         <Toolbar />
         <TopFade />
         <Partial name="carousel">
-          <Carousel res={props.data} />
+          <Carousel res={props.data as ApiResponse} />
         </Partial>
       </main>
       <NavBar />

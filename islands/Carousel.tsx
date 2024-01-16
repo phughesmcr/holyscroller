@@ -1,10 +1,10 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { getPericopeFromIdMemoized } from "@data";
-import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, SQ_KEYS } from "@lib/constants.ts";
-import { $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
-import type { ApiResponse, VerseId } from "@lib/types.ts";
-import { debounce, generateId, getRefFromId } from "@lib/utils.ts";
-import { useSignal } from "@preact/signals";
+import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, LS_KEYS, SQ_KEYS } from "@lib/constants.ts";
+import { $currentParams, $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
+import type { ApiParams, ApiResponse, VerseId } from "@lib/types.ts";
+import { debounce, deleteInessentialsFromUrl, generateId, getRefFromId } from "@lib/utils.ts";
+import { effect, useSignal } from "@preact/signals";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import Article from "../components/Article.tsx";
 
@@ -15,7 +15,65 @@ type CarouselProps = {
 export default function Carousel({ res }: CarouselProps) {
   if (!IS_BROWSER) return <></>;
 
-  const { verses = [], pageSize = API_DEFAULT_PAGE_SIZE, translation = API_DEFAULT_TRANSLATION, next, extras } = res;
+  const { verses = [], pageSize = API_DEFAULT_PAGE_SIZE, translation = API_DEFAULT_TRANSLATION, next, extras, resume } =
+    res;
+
+  if (resume) {
+    const url = deleteInessentialsFromUrl(res.origin);
+    const translation = localStorage?.getItem(LS_KEYS.TRANSLATION);
+    const startFrom = localStorage?.getItem(LS_KEYS.START_FROM);
+    const endAt = localStorage?.getItem(LS_KEYS.END_AT);
+    const cursor = localStorage?.getItem(LS_KEYS.CURSOR);
+    const pageSize = localStorage?.getItem(LS_KEYS.PAGE_SIZE);
+    if (translation) url.searchParams.set(SQ_KEYS.TRANSLATION, translation);
+    if (startFrom) url.searchParams.set(SQ_KEYS.START_FROM, startFrom);
+    if (endAt) url.searchParams.set(SQ_KEYS.END_AT, endAt);
+    if (cursor) url.searchParams.set(SQ_KEYS.CURSOR, cursor);
+    if (pageSize) url.searchParams.set(SQ_KEYS.PAGE_SIZE, pageSize);
+    if (location) location.href = url.toString();
+  }
+
+  const updateFromParams = useCallback((params: ApiParams) => {
+    // set params in local storage
+    const { translation, startFrom, endAt, cursor, pageSize } = params;
+    localStorage.setItem(LS_KEYS.TRANSLATION, translation);
+    localStorage.setItem(LS_KEYS.PAGE_SIZE, pageSize.toString());
+    if (startFrom) {
+      localStorage.setItem(LS_KEYS.START_FROM, startFrom.toString());
+    } else {
+      localStorage.removeItem(LS_KEYS.START_FROM);
+    }
+    if (endAt) {
+      localStorage.setItem(LS_KEYS.END_AT, endAt.toString());
+    } else {
+      localStorage.removeItem(LS_KEYS.END_AT);
+    }
+    if (cursor) {
+      localStorage.setItem(LS_KEYS.CURSOR, cursor);
+    } else {
+      localStorage.removeItem(LS_KEYS.CURSOR);
+    }
+  }, []);
+
+  effect(() => {
+    const params = $currentParams.value;
+    if (params === null || !IS_BROWSER) return;
+    updateFromParams(params);
+  });
+
+  const updateFromVerse = useCallback((id: VerseId) => {
+    if (id) {
+      localStorage?.setItem(LS_KEYS.START_FROM, id.toString());
+    } else {
+      localStorage.removeItem(LS_KEYS.START_FROM);
+    }
+  }, []);
+
+  effect(() => {
+    const startFrom = $currentVerse.value;
+    if (!startFrom || !IS_BROWSER) return;
+    updateFromVerse(startFrom);
+  });
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,7 +82,8 @@ export default function Carousel({ res }: CarouselProps) {
     const { current } = containerRef;
     if (!current) return;
     current.scrollTo({ top: 0 });
-    // current.focus();
+    // current.focus(); // TODO: what is accessibility best practice here?
+    containerRef.current?.setAttribute("aria-busy", "false");
   }, [containerRef]);
 
   const setParams = useCallback(
@@ -60,7 +119,9 @@ export default function Carousel({ res }: CarouselProps) {
           setParams(vid);
         } else {
           if (loadMoreAnchor.current) {
+            // Fade out top article to avoid jarring transition
             firstArticle.value?.classList.add("opacity-0");
+            containerRef.current?.setAttribute("aria-busy", "true");
             setTimeout(() => {
               loadMoreAnchor.current?.click();
             }, 250);

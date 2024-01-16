@@ -48,6 +48,7 @@ export type ApiParams = {
   pageSize: number;
   cursor?: string;
   idx?: number;
+  resume?: boolean;
 };
 
 export type VerseExtras = {
