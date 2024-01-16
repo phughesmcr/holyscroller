@@ -1,12 +1,6 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { getPericopeFromIdMemoized } from "@data";
-import {
-  API_DEFAULT_PAGE_SIZE,
-  API_DEFAULT_TRANSLATION,
-  DATASET_TRIGGER,
-  DATASET_VID,
-  SQ_KEYS,
-} from "@lib/constants.ts";
+import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, SQ_KEYS } from "@lib/constants.ts";
 import { $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiResponse, VerseId } from "@lib/types.ts";
 import { debounce, generateId, getRefFromId } from "@lib/utils.ts";
@@ -52,6 +46,7 @@ export default function Carousel({ res }: CarouselProps) {
   // START: SCROLLING OBSERVER
 
   const firstArticle = useSignal<HTMLDivElement | null>(null);
+  const loadMoreAnchor = useRef<HTMLAnchorElement | null>(null);
 
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
     const debounced = debounce(() => {
@@ -64,21 +59,17 @@ export default function Carousel({ res }: CarouselProps) {
           $currentVerse.value = vid;
           setParams(vid);
         } else {
-          const trigger = (target as HTMLDivElement).dataset[DATASET_TRIGGER];
-          if (trigger) {
-            const anchor = target.querySelector("a");
-            if (anchor) {
-              firstArticle.value?.classList.add("opacity-0");
-              setTimeout(() => {
-                anchor.click();
-              }, 250);
-            }
+          if (loadMoreAnchor.current) {
+            firstArticle.value?.classList.add("opacity-0");
+            setTimeout(() => {
+              loadMoreAnchor.current?.click();
+            }, 250);
           }
         }
       }
     }, 200);
     debounced();
-  }, []);
+  }, [firstArticle, observerRef.current]);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver((entries) => {
@@ -135,6 +126,7 @@ export default function Carousel({ res }: CarouselProps) {
           className="w-full h-full snap-start snap-always mb-4"
         >
           <a
+            ref={loadMoreAnchor}
             href={next.url.toString()}
             f-partial={next.fp.toString()}
             className="w-full h-full flex items-center justify-center"
