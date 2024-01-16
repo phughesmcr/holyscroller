@@ -10,6 +10,7 @@ import {
 import { $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiResponse, VerseId } from "@lib/types.ts";
 import { debounce, generateId, getRefFromId } from "@lib/utils.ts";
+import { useSignal } from "@preact/signals";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import Article from "../components/Article.tsx";
 
@@ -50,6 +51,8 @@ export default function Carousel({ res }: CarouselProps) {
 
   // START: SCROLLING OBSERVER
 
+  const firstArticle = useSignal<HTMLDivElement | null>(null);
+
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
     const debounced = debounce(() => {
       if (entry.isIntersecting) {
@@ -65,6 +68,7 @@ export default function Carousel({ res }: CarouselProps) {
           if (trigger) {
             const anchor = target.querySelector("a");
             if (anchor) {
+              firstArticle.value?.classList.add("opacity-0");
               setTimeout(() => {
                 anchor.click();
               }, 250);
@@ -82,7 +86,10 @@ export default function Carousel({ res }: CarouselProps) {
     }, { threshold: 1 });
 
     const articles = document.querySelectorAll("article");
-    articles.forEach((article) => observerRef.current?.observe(article));
+    articles.forEach((article, i) => {
+      if (i === 0) firstArticle.value = article as HTMLDivElement;
+      observerRef.current?.observe(article);
+    });
 
     return () => {
       if (observerRef.current) {
