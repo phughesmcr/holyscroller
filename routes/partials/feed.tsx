@@ -1,5 +1,5 @@
 import { Partial } from "$fresh/runtime.ts";
-import { defineRoute, Handlers, type RouteConfig } from "$fresh/server.ts";
+import { defineRoute, type RouteConfig } from "$fresh/server.ts";
 import { getExtrasForVerses, getPageOfVerses } from "@db";
 import { $currentUrl, $currentVerse } from "@lib/state.ts";
 import { ApiParams, ApiResponse, Verse, VerseId } from "@lib/types.ts";
@@ -33,18 +33,6 @@ const createResponse = async (req: Request): Promise<ApiResponse> => {
   return { ...params, verses, extras, next, origin: currentUrl };
 };
 
-export const handler: Handlers<ApiResponse> = {
-  async GET(req, ctx) {
-    try {
-      const res = await createResponse(req);
-      $currentUrl.value = new URL(res.origin);
-      return ctx.render(res);
-    } catch (err) {
-      console.error(err);
-      return ctx.renderNotFound();
-    }
-  },
-};
 export default defineRoute(async (req, ctx) => {
   try {
     const res = await createResponse(req);
