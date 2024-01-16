@@ -58,12 +58,10 @@ export default function Carousel({ res }: CarouselProps) {
         const id = (target as HTMLDivElement).dataset[DATASET_VID];
         if (id) {
           const vid = parseInt(id, 10) as VerseId;
-          console.log(target, vid);
           $currentVerse.value = vid;
           setParams(vid);
         } else {
           const trigger = (target as HTMLDivElement).dataset[DATASET_TRIGGER];
-          console.log(target, trigger);
           if (trigger) {
             const anchor = target.querySelector("a");
             if (anchor) {
