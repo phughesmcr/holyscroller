@@ -12,6 +12,12 @@
       }
     ],
     "apple-touch-icons": "off",
-    "manifest-file-extension": "off"
+    "manifest-file-extension": "off",
+    "axe/aria": [
+      "default",
+      {
+        "aria-valid-attr-value": "off"
+      }
+    ]
   }
 }

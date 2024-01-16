@@ -1,6 +1,12 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { getPericopeFromIdMemoized } from "@data";
-import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, ATTR_VID, SQ_KEYS } from "@lib/constants.ts";
+import {
+  API_DEFAULT_PAGE_SIZE,
+  API_DEFAULT_TRANSLATION,
+  DATASET_TRIGGER,
+  DATASET_VID,
+  SQ_KEYS,
+} from "@lib/constants.ts";
 import { $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiResponse, VerseId } from "@lib/types.ts";
 import { debounce, generateId, getRefFromId } from "@lib/utils.ts";
@@ -49,11 +55,23 @@ export default function Carousel({ res }: CarouselProps) {
       if (entry.isIntersecting) {
         const { target } = entry;
         if (!target) return;
-        const id = target.getAttribute(ATTR_VID);
+        const id = (target as HTMLDivElement).dataset[DATASET_VID];
         if (id) {
           const vid = parseInt(id, 10) as VerseId;
+          console.log(target, vid);
           $currentVerse.value = vid;
           setParams(vid);
+        } else {
+          const trigger = (target as HTMLDivElement).dataset[DATASET_TRIGGER];
+          console.log(target, trigger);
+          if (trigger) {
+            const anchor = target.querySelector("a");
+            if (anchor) {
+              setTimeout(() => {
+                anchor.click();
+              }, 250);
+            }
+          }
         }
       }
     }, 200);
@@ -91,12 +109,12 @@ export default function Carousel({ res }: CarouselProps) {
         const peri = getPericopeFromIdMemoized(id);
         return (
           <Article
+            aria-posinset={index + 1}
+            aria-setsize={((pageSize || -1) + 1) || -1} // (pageSize + 1) or -1
             idx={index}
             translation={translation}
             key={id}
             verse={verse}
-            posinset={index + 1}
-            setsize={((pageSize || -1) + 1) || -1} // (pageSize + 1) or -1
             bookInfo={extras?.books[book]}
             // crossRefs={extras?.crossRefs[verse[0]]}
             pericope={peri?.t}
@@ -108,6 +126,7 @@ export default function Carousel({ res }: CarouselProps) {
           aria-posinset={(pageSize || verses.length) + 1}
           aria-setsize={((pageSize || -1) + 1) || -1} // pageSize or -1
           key={generateId()}
+          data-trigger="load-more"
           className="w-full h-full snap-start snap-always mb-4"
         >
           <a
@@ -117,7 +136,7 @@ export default function Carousel({ res }: CarouselProps) {
             onClick={scrollToTop}
             aria-label="Load more"
           >
-            <span className="text-2xl underline">Load more</span>
+            <span className="text-2xl dark:text-cyan-300 text-cyan-900 underline">Loading more...</span>
           </a>
         </article>
       )}

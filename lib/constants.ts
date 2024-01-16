@@ -72,5 +72,5 @@ export const TRANSLATIONS: TranslationInfo[] = [
 
 export const FAB_URL = "https://www.achurchnearyou.com/" as const;
 
-export const ATTR_IDX = "aria-posinset" as const;
-export const ATTR_VID = "data-verse" as const;
+export const DATASET_VID = "verse" as const;
+export const DATASET_TRIGGER = "trigger" as const;

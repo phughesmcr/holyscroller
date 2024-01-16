@@ -7,15 +7,13 @@ type ArticleProps = {
   idx: number;
   verse: Verse;
   key: number;
-  posinset?: number;
-  setsize?: number;
   bookInfo?: BookInfo;
   crossRefs?: Deno.KvEntry<string>[];
   pericope?: string;
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export default function Article(props: ArticleProps) {
-  const { idx, key, translation, verse, posinset, setsize, bookInfo, crossRefs, pericope = "" } = props;
+  const { idx, key, translation, verse, bookInfo, crossRefs, pericope = "" } = props;
   const [id, text] = verse;
 
   const [b, c, v] = getRefFromId(id as VerseId);
@@ -25,8 +23,6 @@ export default function Article(props: ArticleProps) {
       <article
         {...props}
         key={key}
-        aria-posinset={posinset}
-        aria-setsize={setsize}
         tabIndex={0}
         className="ui w-full h-full snap-start snap-always"
       >
@@ -39,8 +35,6 @@ export default function Article(props: ArticleProps) {
     <article
       {...props}
       key={key}
-      aria-posinset={posinset}
-      aria-setsize={setsize}
       data-verse={id}
       tabIndex={0}
       className="ui w-full h-full snap-start snap-always transition-opacity"
