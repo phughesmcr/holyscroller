@@ -1,25 +1,27 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Label } from "@components/Label.tsx";
 import { Select } from "@components/Select.tsx";
-import { API_DEFAULT_TRANSLATION, LINK_CANONICAL, SQ_KEYS, TRANSLATIONS } from "@lib/constants.ts";
+import { LINK_CANONICAL, SQ_KEYS, TRANSLATIONS } from "@lib/constants.ts";
 import { $currentTranslation, $currentUrl } from "@lib/state.ts";
-import { Translation } from "@lib/types.ts";
-import { effect, useSignal } from "@preact/signals";
+import { generateId } from "@lib/utils.ts";
+import { effect } from "@preact/signals";
 import type { JSX } from "preact";
+import { useRef } from "preact/hooks";
 
 export default function TranslationSelect() {
   if (!IS_BROWSER) return <></>;
 
-  const selectedTranslation = useSignal<Translation>(API_DEFAULT_TRANSLATION);
+  const selectRef = useRef<HTMLSelectElement>(null);
 
   effect(() => {
-    selectedTranslation.value = $currentTranslation.value;
+    const value = $currentTranslation.value;
+    if (!value || !selectRef.current) return;
+    selectRef.current.value = value;
   });
 
   const changeTranslation = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
     const res = new URL($currentUrl.peek() ?? location?.href ?? LINK_CANONICAL);
     res.searchParams.set(SQ_KEYS.TRANSLATION, e.currentTarget.value);
-    selectedTranslation.value = e.currentTarget.value as Translation;
     $currentUrl.value = res;
     location.href = res.toString();
   };
@@ -31,20 +33,23 @@ export default function TranslationSelect() {
           Trans.
         </span>
         <Select
+          ref={selectRef}
           title="Bible Translation"
           aria-label="Choose a bible translation"
           name="translation-select"
           id="translation-select"
           onChange={changeTranslation}
-          value={selectedTranslation}
+          value={$currentTranslation.value}
+          key={generateId()}
         >
           {TRANSLATIONS.map((trans) => {
             const { flag, innerText, title, value } = trans;
             return (
               <option
+                key={value}
                 title={title}
                 aria-label={title}
-                selected={selectedTranslation.value === value}
+                selected={value === $currentTranslation.value}
                 value={value}
                 class="truncate"
               >
