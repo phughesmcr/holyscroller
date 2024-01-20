@@ -238,11 +238,11 @@ export function memoizeWithLimitedHistory<T extends any[], U>(fn: (...args: T) =
 export function memoizeWithLocalStorage<T extends any[], U>(fn: (...args: T) => U) {
   return (...args: T): U => {
     const key = JSON.stringify(args);
-    if (localStorage.getItem(key)) {
-      return JSON.parse(localStorage.getItem(key) || "");
+    if (localStorage?.getItem(key)) {
+      return JSON.parse(localStorage?.getItem(key) || "");
     } else {
       const result = fn(...args);
-      localStorage.setItem(key, JSON.stringify(result));
+      localStorage?.setItem(key, JSON.stringify(result));
       return result;
     }
   };
@@ -287,7 +287,7 @@ export function setParamsWithoutReload(params: Partial<ApiParams>, url: URL | st
 }
 
 export function getBoolFromLocalStorage(key: LS_KEYS, defaultValue = false): boolean {
-  return !!JSON.parse(localStorage.getItem(key) || `${defaultValue}`);
+  return !!JSON.parse(localStorage?.getItem(key) || `${defaultValue}`);
 }
 
 export function generateId(): string {

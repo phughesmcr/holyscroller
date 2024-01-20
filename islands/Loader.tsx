@@ -1,6 +1,6 @@
+import IconLoader3 from "@components/IconLoader.tsx";
 import { $isLoading } from "@lib/state.ts";
 import { effect } from "@preact/signals";
-import IconLoader3 from "icons/loader-3.tsx";
 import { useEffect, useRef } from "preact/hooks";
 
 export default function Loader() {

@@ -15,7 +15,9 @@ export default function NavButton(props: NavButtonProps) {
       <div>
         {children}
       </div>
-      <span className="text-xs text-ellipsis whitespace-nowrap text-center">{innerText}</span>
+      <span className="text-xs text-ellipsis whitespace-nowrap text-center">
+        {innerText}
+      </span>
     </a>
   );
 }

@@ -1,27 +1,28 @@
 import { Partial } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
+import { TopFade } from "@components/TopFade.tsx";
+import Resumer from "@islands/Resumer.tsx";
 import { $isLoading } from "@lib/state.ts";
 import type { ApiResponse } from "@lib/types.ts";
 import AppContainer from "../../components/AppContainer.tsx";
 import Catechism from "../../db/catechism.json" assert { type: "json" };
 import NavBar from "../../islands/NavBar.tsx";
 import Toolbar from "../../islands/Toolbar/Toolbar.tsx";
-import { TopFade } from "@components/TopFade.tsx";
 
 export default function CatechismHome(props: PageProps<ApiResponse>) {
   $isLoading.value = false;
   return (
     <AppContainer>
       <main role="main" className="min-w-0 min-h-0 w-full h-full" f-client-nav>
+        <Resumer res={props.data} />
         <Toolbar />
         <TopFade />
-        <Partial name="carousel">
-          {$isLoading.value = false}
-          <div
-            role="feed"
-            aria-busy="false"
-            className="w-full h-full overflow-y-auto hide-scrollbars touch-pan-y snap-y snap-mandatory p-2"
-          >
+        <div
+          role="feed"
+          aria-busy="false"
+          className="w-full h-full overflow-y-auto hide-scrollbars touch-pan-y snap-y snap-mandatory p-2"
+        >
+          <Partial name="carousel" mode="replace">
             <article key={0} className="ui catechism w-full h-full snap-start snap-always">
               <h1>A Catechism</h1>
               <p>
@@ -41,8 +42,8 @@ export default function CatechismHome(props: PageProps<ApiResponse>) {
                 </article>
               );
             })}
-          </div>
-        </Partial>
+          </Partial>
+        </div>
       </main>
       <NavBar />
     </AppContainer>
