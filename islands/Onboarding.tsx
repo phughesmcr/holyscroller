@@ -14,11 +14,6 @@ export default function Onboarding() {
   effect(() => {
     if ($isOnboard.value) {
       dialogRef.current?.remove();
-      dialogRef.current?.classList.add("hidden");
-      dialogRef.current?.classList.remove("flex");
-    } else {
-      dialogRef.current?.classList.remove("hidden");
-      dialogRef.current?.classList.add("flex");
     }
   });
 
@@ -40,7 +35,7 @@ export default function Onboarding() {
       role="dialog"
       aria-label="Scroll up to get started!"
       aria-orientation="vertical"
-      aria-description="Scroll up to dismiss this screen and get started."
+      aria-description="Interact to dismiss this screen and get started."
       className="pointer-events-auto z-50 flex isolate absolute top-0 left-0 flex-col items-center justify-center w-full h-full bg-zinc-100 text-zinc-700 opacity-70 touch-manipulation"
       onTouchStart={toggleIsOnboard}
       onPointerDown={toggleIsOnboard}

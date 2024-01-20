@@ -39,7 +39,7 @@ export default defineRoute(async (req, ctx) => {
     $currentUrl.value = new URL(res.origin);
     $currentVerse.value = res.verses[0][0] as VerseId;
     return (
-      <Partial name="carousel">
+      <Partial name="carousel" mode="append">
         <Carousel res={res} />
       </Partial>
     );

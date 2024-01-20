@@ -16,6 +16,7 @@ import * as $Fab from "./islands/Fab.tsx";
 import * as $Loader from "./islands/Loader.tsx";
 import * as $NavBar from "./islands/NavBar.tsx";
 import * as $Onboarding from "./islands/Onboarding.tsx";
+import * as $Resumer from "./islands/Resumer.tsx";
 import * as $Toolbar_BookSelect from "./islands/Toolbar/BookSelect.tsx";
 import * as $Toolbar_PericopeSelect from "./islands/Toolbar/PericopeSelect.tsx";
 import * as $Toolbar_Toolbar from "./islands/Toolbar/Toolbar.tsx";
@@ -40,6 +41,7 @@ const manifest = {
     "./islands/Loader.tsx": $Loader,
     "./islands/NavBar.tsx": $NavBar,
     "./islands/Onboarding.tsx": $Onboarding,
+    "./islands/Resumer.tsx": $Resumer,
     "./islands/Toolbar/BookSelect.tsx": $Toolbar_BookSelect,
     "./islands/Toolbar/PericopeSelect.tsx": $Toolbar_PericopeSelect,
     "./islands/Toolbar/Toolbar.tsx": $Toolbar_Toolbar,

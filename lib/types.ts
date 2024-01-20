@@ -53,7 +53,6 @@ export type ApiParams = {
 
 export type VerseExtras = {
   books: Record<number, BookInfo>;
-  crossRefs: Record<number, Deno.KvEntry<string>[]>;
   pericopes: Record<number, Record<VerseId, Pericope>>;
 };
 
@@ -66,6 +65,6 @@ export type VerseNextPageParams = {
 export type ApiResponse = ApiParams & {
   origin: URL | string;
   verses: Verse[];
-  extras?: VerseExtras;
+  extras: VerseExtras;
   next?: VerseNextPageParams;
 };

@@ -92,6 +92,21 @@ export default function App({ Component }: PageProps) {
           rel="stylesheet"
           href={"https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700;800&display=swap"}
         />
+
+        <script type="application/ld+json">
+          {{
+            "@context": "http://schema.org",
+            "@type": "WebApplication",
+            "name": "HolyScroller",
+            "url": "https://www.holyscroller.app",
+            "description": "Scroll the scriptures!",
+            "applicationCategory": "Lifestyle",
+            "genre": "faith",
+            "browserRequirements": "Requires JavaScript. Requires HTML5.",
+            "softwareVersion": "0.1.0",
+            "operatingSystem": "All",
+          }}
+        </script>
       </head>
       <body className="no-interaction relative fill-available-height fill-available-width overflow-hidden bg-zinc-100 text-zinc-950 dark:bg-zinc-950 dark:text-zinc-100">
         <noscript>You need to enable JavaScript to run this app.</noscript>

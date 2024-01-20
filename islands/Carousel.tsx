@@ -3,7 +3,7 @@ import { getPericopeFromIdMemoized } from "@data";
 import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, LS_KEYS, SQ_KEYS } from "@lib/constants.ts";
 import { $currentParams, $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, VerseId } from "@lib/types.ts";
-import { debounce, deleteInessentialsFromUrl, generateId, getRefFromId } from "@lib/utils.ts";
+import { debounce, generateId, getRefFromId } from "@lib/utils.ts";
 import { effect, useSignal } from "@preact/signals";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import Article from "../components/Article.tsx";
@@ -18,40 +18,25 @@ export default function Carousel({ res }: CarouselProps) {
   const { verses = [], pageSize = API_DEFAULT_PAGE_SIZE, translation = API_DEFAULT_TRANSLATION, next, extras, resume } =
     res;
 
-  if (resume) {
-    const url = deleteInessentialsFromUrl(res.origin);
-    const translation = localStorage?.getItem(LS_KEYS.TRANSLATION);
-    const startFrom = localStorage?.getItem(LS_KEYS.START_FROM);
-    const endAt = localStorage?.getItem(LS_KEYS.END_AT);
-    const cursor = localStorage?.getItem(LS_KEYS.CURSOR);
-    const pageSize = localStorage?.getItem(LS_KEYS.PAGE_SIZE);
-    if (translation) url.searchParams.set(SQ_KEYS.TRANSLATION, translation);
-    if (startFrom) url.searchParams.set(SQ_KEYS.START_FROM, startFrom);
-    if (endAt) url.searchParams.set(SQ_KEYS.END_AT, endAt);
-    if (cursor) url.searchParams.set(SQ_KEYS.CURSOR, cursor);
-    if (pageSize) url.searchParams.set(SQ_KEYS.PAGE_SIZE, pageSize);
-    if (location) location.href = url.toString();
-  }
-
   const updateFromParams = useCallback((params: ApiParams) => {
     // set params in local storage
     const { translation, startFrom, endAt, cursor, pageSize } = params;
-    localStorage.setItem(LS_KEYS.TRANSLATION, translation);
-    localStorage.setItem(LS_KEYS.PAGE_SIZE, pageSize.toString());
+    localStorage?.setItem(LS_KEYS.TRANSLATION, translation);
+    localStorage?.setItem(LS_KEYS.PAGE_SIZE, pageSize.toString());
     if (startFrom) {
-      localStorage.setItem(LS_KEYS.START_FROM, startFrom.toString());
+      localStorage?.setItem(LS_KEYS.START_FROM, startFrom.toString());
     } else {
-      localStorage.removeItem(LS_KEYS.START_FROM);
+      localStorage?.removeItem(LS_KEYS.START_FROM);
     }
     if (endAt) {
-      localStorage.setItem(LS_KEYS.END_AT, endAt.toString());
+      localStorage?.setItem(LS_KEYS.END_AT, endAt.toString());
     } else {
-      localStorage.removeItem(LS_KEYS.END_AT);
+      localStorage?.removeItem(LS_KEYS.END_AT);
     }
     if (cursor) {
-      localStorage.setItem(LS_KEYS.CURSOR, cursor);
+      localStorage?.setItem(LS_KEYS.CURSOR, cursor);
     } else {
-      localStorage.removeItem(LS_KEYS.CURSOR);
+      localStorage?.removeItem(LS_KEYS.CURSOR);
     }
   }, []);
 
@@ -65,7 +50,7 @@ export default function Carousel({ res }: CarouselProps) {
     if (id) {
       localStorage?.setItem(LS_KEYS.START_FROM, id.toString());
     } else {
-      localStorage.removeItem(LS_KEYS.START_FROM);
+      localStorage?.removeItem(LS_KEYS.START_FROM);
     }
   }, []);
 
@@ -76,15 +61,6 @@ export default function Carousel({ res }: CarouselProps) {
   });
 
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const scrollToTop = useCallback(() => {
-    const { current } = containerRef;
-    if (!current) return;
-    current.scrollTo({ top: 0 });
-    // current.focus(); // TODO: what is accessibility best practice here?
-    containerRef.current?.setAttribute("aria-busy", "false");
-  }, [containerRef]);
 
   const setParams = useCallback(
     debounce((id: number) => {
@@ -119,18 +95,18 @@ export default function Carousel({ res }: CarouselProps) {
           setParams(vid);
         } else {
           if (loadMoreAnchor.current) {
-            // Fade out top article to avoid jarring transition
-            firstArticle.value?.classList.add("opacity-0");
-            containerRef.current?.setAttribute("aria-busy", "true");
+            const tmp = loadMoreAnchor.current!;
+            loadMoreAnchor.current = null;
             setTimeout(() => {
-              loadMoreAnchor.current?.click();
-            }, 250);
+              target.parentElement?.removeChild(target);
+            }, 100);
+            tmp.click();
           }
         }
       }
     }, 200);
     debounced();
-  }, [firstArticle, observerRef.current]);
+  }, [firstArticle, observerRef.current, loadMoreAnchor.current]);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver((entries) => {
@@ -154,12 +130,7 @@ export default function Carousel({ res }: CarouselProps) {
   // END: SCROLLING OBSERVER
 
   return (
-    <div
-      ref={containerRef}
-      role="feed"
-      aria-busy="false"
-      className="w-full h-full overflow-x-hidden overflow-y-auto hide-scrollbars touch-pan-y snap-y snap-mandatory p-2 overscroll-touch"
-    >
+    <>
       {verses?.map((verse, index) => {
         const id = verse[0] as VerseId;
         const book = getRefFromId(id)[0];
@@ -168,13 +139,11 @@ export default function Carousel({ res }: CarouselProps) {
           <Article
             aria-posinset={index + 1}
             aria-setsize={((pageSize || -1) + 1) || -1} // (pageSize + 1) or -1
-            idx={index}
-            translation={translation}
+            bookInfo={extras.books[book]}
             key={id}
-            verse={verse}
-            bookInfo={extras?.books[book]}
-            // crossRefs={extras?.crossRefs[verse[0]]}
             pericope={peri?.t}
+            translation={translation}
+            verse={verse}
           />
         );
       })}
@@ -182,8 +151,8 @@ export default function Carousel({ res }: CarouselProps) {
         <article
           aria-posinset={(pageSize || verses.length) + 1}
           aria-setsize={((pageSize || -1) + 1) || -1} // pageSize or -1
-          key={generateId()}
           data-trigger="load-more"
+          key={generateId()}
           className="w-full h-full snap-start snap-always mb-4"
         >
           <a
@@ -191,13 +160,12 @@ export default function Carousel({ res }: CarouselProps) {
             href={next.url.toString()}
             f-partial={next.fp.toString()}
             className="w-full h-full flex items-center justify-center"
-            onClick={scrollToTop}
             aria-label="Load more"
           >
             <span className="text-2xl dark:text-cyan-300 text-cyan-900 underline">Loading more...</span>
           </a>
         </article>
       )}
-    </div>
+    </>
   );
 }
