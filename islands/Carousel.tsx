@@ -3,7 +3,7 @@ import { getPericopeFromIdMemoized } from "@data";
 import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, LS_KEYS, SQ_KEYS } from "@lib/constants.ts";
 import { $currentParams, $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, VerseId } from "@lib/types.ts";
-import { debounce, generateId, getRefFromId } from "@lib/utils.ts";
+import { debounce, getRefFromId } from "@lib/utils.ts";
 import { effect, useSignal } from "@preact/signals";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import Article from "../components/Article.tsx";
@@ -80,10 +80,13 @@ export default function Carousel({ res }: CarouselProps) {
 
   // START: SCROLLING OBSERVER
 
-  const firstArticle = useSignal<HTMLDivElement | null>(null);
-  const loadMoreAnchor = useRef<HTMLAnchorElement | null>(null);
+  const hasTriggered = useSignal(false);
+  const nextAnchor = useRef<HTMLAnchorElement>(null);
 
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
+    // hasTriggered.value = false;
+    const triggerPoint = document.querySelector("article:nth-last-of-type(3)");
+
     const debounced = debounce(() => {
       if (entry.isIntersecting) {
         const { target } = entry;
@@ -93,20 +96,18 @@ export default function Carousel({ res }: CarouselProps) {
           const vid = parseInt(id, 10) as VerseId;
           $currentVerse.value = vid;
           setParams(vid);
-        } else {
-          if (loadMoreAnchor.current) {
-            const tmp = loadMoreAnchor.current!;
-            loadMoreAnchor.current = null;
-            setTimeout(() => {
-              target.parentElement?.removeChild(target);
-            }, 100);
-            tmp.click();
+        }
+        if (target === triggerPoint) {
+          if (!hasTriggered.value) {
+            hasTriggered.value = true;
+            nextAnchor.current?.click();
           }
         }
       }
     }, 200);
+
     debounced();
-  }, [firstArticle, observerRef.current, loadMoreAnchor.current]);
+  }, [observerRef.current]);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver((entries) => {
@@ -114,8 +115,7 @@ export default function Carousel({ res }: CarouselProps) {
     }, { threshold: 1 });
 
     const articles = document.querySelectorAll("article");
-    articles.forEach((article, i) => {
-      if (i === 0) firstArticle.value = article as HTMLDivElement;
+    articles.forEach((article) => {
       observerRef.current?.observe(article);
     });
 
@@ -131,14 +131,15 @@ export default function Carousel({ res }: CarouselProps) {
 
   return (
     <>
-      {verses?.map((verse, index) => {
+      {verses?.map((verse) => {
         const id = verse[0] as VerseId;
         const book = getRefFromId(id)[0];
         const peri = getPericopeFromIdMemoized(id);
         return (
           <Article
-            aria-posinset={index + 1}
-            aria-setsize={((pageSize || -1) + 1) || -1} // (pageSize + 1) or -1
+            /* TODO: this needs fixing!
+            aria-posinset={}
+            aria-setsize={} */
             bookInfo={extras.books[book]}
             key={id}
             pericope={peri?.t}
@@ -148,23 +149,9 @@ export default function Carousel({ res }: CarouselProps) {
         );
       })}
       {next && (
-        <article
-          aria-posinset={(pageSize || verses.length) + 1}
-          aria-setsize={((pageSize || -1) + 1) || -1} // pageSize or -1
-          data-trigger="load-more"
-          key={generateId()}
-          className="w-full h-full snap-start snap-always mb-4"
-        >
-          <a
-            ref={loadMoreAnchor}
-            href={next.url.toString()}
-            f-partial={next.fp.toString()}
-            className="w-full h-full flex items-center justify-center"
-            aria-label="Load more"
-          >
-            <span className="text-2xl dark:text-cyan-300 text-cyan-900 underline">Loading more...</span>
-          </a>
-        </article>
+        <a class="hidden" ref={nextAnchor} href={next.url.toString()} f-partial={next.fp.toString()}>
+          <span className="sr-only">Load More</span>
+        </a>
       )}
     </>
   );
