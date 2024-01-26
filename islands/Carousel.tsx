@@ -3,7 +3,7 @@ import { getPericopeFromIdMemoized } from "@data";
 import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, LS_KEYS, SQ_KEYS } from "@lib/constants.ts";
 import { $currentParams, $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, VerseId } from "@lib/types.ts";
-import { debounce, getRefFromId } from "@lib/utils.ts";
+import { debounce, getLastNElements, getRefFromId, isValidId, setOrRemoveFromStorage } from "@lib/utils.ts";
 import { effect, useSignal } from "@preact/signals";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import Article from "../components/Article.tsx";
@@ -12,101 +12,103 @@ type CarouselProps = {
   res: ApiResponse;
 };
 
+const DEBOUNCE_TIMER_MS = 200 as const;
+const SET_PARAMS_TIMER_MS = 300 as const;
+
 export default function Carousel({ res }: CarouselProps) {
   if (!IS_BROWSER) return <></>;
 
-  const { verses = [], pageSize = API_DEFAULT_PAGE_SIZE, translation = API_DEFAULT_TRANSLATION, next, extras, resume } =
-    res;
+  const {
+    extras,
+    next,
+    pageSize = API_DEFAULT_PAGE_SIZE,
+    resume = false,
+    translation = API_DEFAULT_TRANSLATION,
+    verses = [],
+  } = res;
 
-  const updateFromParams = useCallback((params: ApiParams) => {
-    // set params in local storage
-    const { translation, startFrom, endAt, cursor, pageSize } = params;
-    localStorage?.setItem(LS_KEYS.TRANSLATION, translation);
-    localStorage?.setItem(LS_KEYS.PAGE_SIZE, pageSize.toString());
-    if (startFrom) {
-      localStorage?.setItem(LS_KEYS.START_FROM, startFrom.toString());
-    } else {
-      localStorage?.removeItem(LS_KEYS.START_FROM);
-    }
-    if (endAt) {
-      localStorage?.setItem(LS_KEYS.END_AT, endAt.toString());
-    } else {
-      localStorage?.removeItem(LS_KEYS.END_AT);
-    }
-    if (cursor) {
-      localStorage?.setItem(LS_KEYS.CURSOR, cursor);
-    } else {
-      localStorage?.removeItem(LS_KEYS.CURSOR);
-    }
-  }, []);
-
-  effect(() => {
-    const params = $currentParams.value;
-    if (params === null || !IS_BROWSER) return;
-    updateFromParams(params);
-  });
-
-  const updateFromVerse = useCallback((id: VerseId) => {
-    if (id) {
-      localStorage?.setItem(LS_KEYS.START_FROM, id.toString());
-    } else {
-      localStorage?.removeItem(LS_KEYS.START_FROM);
-    }
-  }, []);
-
-  effect(() => {
-    const startFrom = $currentVerse.value;
-    if (!startFrom || !IS_BROWSER) return;
-    updateFromVerse(startFrom);
-  });
-
+  const hasTriggered = useSignal<boolean>(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
-
-  const setParams = useCallback(
-    debounce((id: number) => {
-      const value = $currentUrl.peek();
-      if (value) {
-        const newUrl = new URL(value);
-        newUrl.searchParams.set(SQ_KEYS.CURRENT, `${id}`);
-        window.history.pushState(null, "", newUrl.toString());
-      }
-    }, 300),
-    [],
-  );
+  const nextAnchorRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     $isLoading.value = false;
   }, []);
 
-  // START: SCROLLING OBSERVER
+  //#region currentParams.value update
 
-  const hasTriggered = useSignal(false);
-  const nextAnchor = useRef<HTMLAnchorElement>(null);
+  const updateLSFromParams = useCallback((params: ApiParams) => {
+    const { translation, startFrom, endAt, cursor, pageSize } = params;
+    localStorage?.setItem(LS_KEYS.TRANSLATION, translation);
+    localStorage?.setItem(LS_KEYS.PAGE_SIZE, pageSize.toString());
+    setOrRemoveFromStorage(LS_KEYS.START_FROM, startFrom?.toString());
+    setOrRemoveFromStorage(LS_KEYS.END_AT, endAt?.toString());
+    setOrRemoveFromStorage(LS_KEYS.CURSOR, cursor?.toString());
+  }, []);
+
+  effect(() => {
+    const params = $currentParams.value;
+    if (!params) return;
+    updateLSFromParams(params);
+  });
+
+  //#endregion
+
+  //#region currentVerse.value update
+
+  const updateLSFromVerse = useCallback((id: VerseId) => {
+    setOrRemoveFromStorage(LS_KEYS.START_FROM, id.toString());
+  }, []);
+
+  effect(() => {
+    const startFrom = $currentVerse.value;
+    if (!startFrom || !IS_BROWSER) return;
+    updateLSFromVerse(startFrom);
+  });
+
+  //#endregion
+
+  //#region scroll observer
+
+  const setParams = useCallback(
+    debounce((id: number) => {
+      const value = $currentUrl.peek();
+      if (!value) return;
+      const newUrl = new URL(value);
+      newUrl.searchParams.set(SQ_KEYS.CURRENT, `${id}`);
+      globalThis.history.pushState(null, "", newUrl.toString());
+    }, SET_PARAMS_TIMER_MS),
+    [],
+  );
+
+  const setParamsFromId = (id: string) => {
+    const vid = parseInt(id, 10) as VerseId;
+    if (!isValidId(vid)) return;
+    $currentVerse.value = vid;
+    setParams(vid);
+  };
+
+  const triggerLoad = () => {
+    hasTriggered.value = true;
+    nextAnchorRef.current?.click();
+  };
+
+  const scrollHandler = debounce((triggerPoints: Element[], entry: IntersectionObserverEntry) => {
+    if (!entry.target || !entry.isIntersecting) return;
+    const target = entry.target as HTMLDivElement;
+    const id = target.dataset[DATASET_VID];
+    if (id) {
+      setParamsFromId(id);
+    }
+    if (triggerPoints.includes(target) && !hasTriggered.value) {
+      triggerLoad();
+    }
+  }, DEBOUNCE_TIMER_MS);
 
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
-    // hasTriggered.value = false;
-    const triggerPoint = document.querySelector("article:nth-last-of-type(3)");
-
-    const debounced = debounce(() => {
-      if (entry.isIntersecting) {
-        const { target } = entry;
-        if (!target) return;
-        const id = (target as HTMLDivElement).dataset[DATASET_VID];
-        if (id) {
-          const vid = parseInt(id, 10) as VerseId;
-          $currentVerse.value = vid;
-          setParams(vid);
-        }
-        if (target === triggerPoint) {
-          if (!hasTriggered.value) {
-            hasTriggered.value = true;
-            nextAnchor.current?.click();
-          }
-        }
-      }
-    }, 200);
-
-    debounced();
+    const nTriggerPoints = Math.ceil(($currentParams.peek()?.pageSize || API_DEFAULT_PAGE_SIZE) / 2);
+    const triggerPoints = getLastNElements("article", nTriggerPoints).filter(Boolean).reverse();
+    scrollHandler(triggerPoints, entry);
   }, [observerRef.current]);
 
   useEffect(() => {
@@ -127,7 +129,7 @@ export default function Carousel({ res }: CarouselProps) {
     };
   }, [handleScrollIntoView]);
 
-  // END: SCROLLING OBSERVER
+  //#endregion
 
   return (
     <>
@@ -149,7 +151,7 @@ export default function Carousel({ res }: CarouselProps) {
         );
       })}
       {next && (
-        <a class="hidden" ref={nextAnchor} href={next.url.toString()} f-partial={next.fp.toString()}>
+        <a className="hidden" ref={nextAnchorRef} href={next.url.toString()} f-partial={next.fp.toString()}>
           <span className="sr-only">Load More</span>
         </a>
       )}

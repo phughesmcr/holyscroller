@@ -1,7 +1,7 @@
 import { asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
-import Loader from "@islands/Loader.tsx";
-import Onboarding from "@islands/Onboarding.tsx";
+import Loader from "../islands/super/Loader.tsx";
+import Onboarding from "../islands/super/Onboarding.tsx";
 import {
   APP_NAME,
   APP_TAGLINE,

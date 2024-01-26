@@ -59,9 +59,9 @@ export default function Fab() {
           href={$fabUrl.value.toString()}
           target="_blank"
           rel="noopener noreferrer"
-          class="flex justify-center items-center text-black w-full h-full"
+          className="flex justify-center items-center text-black w-full h-full"
         >
-          <IconLocation class="w-8 h-8" />
+          <IconLocation className="w-8 h-8" />
           <span className="sr-only">Find a church near you</span>
         </a>
       </div>

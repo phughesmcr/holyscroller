@@ -11,10 +11,39 @@ import {
   SQ_KEYS,
 } from "./constants.ts";
 
+import { getBookIdFromTitle } from "@data";
 import type { ApiParams, BibleRef, Translation, VerseId } from "@lib/types.ts";
 import { escapeSql } from "escape";
 
+const versePattern = /(?<book>\d?\w+?\s?[a-z]+)\s(?<chapter>\d+)(?::(?<verse>\d+)(?:-(?<endVerse>\d+))?)?/gi;
+
 // VerseRef helpers
+
+export function getRefFromString(str: string): BibleRef | [-1, -1, -1] {
+  const cleanedStr = escapeSql(str.trim());
+  const matches = cleanedStr.matchAll(versePattern);
+  const match = [...matches][0];
+  if (!match) {
+    const id = parseInt(cleanedStr, 10);
+    if (isValidId(id)) return getRefFromId(id);
+    return [-1, -1, -1];
+  }
+  const book = getBookIdFromTitle(match.groups?.book || "");
+  if (!book) return [-1, -1, -1];
+  const chapter = parseInt(match.groups?.chapter || "1", 10);
+  const verse = parseInt(match.groups?.verse || "1", 10);
+  return [book, chapter, verse];
+}
+
+export function getIdFromString(str: string): VerseId | -1 {
+  // str could be either a bible reference (e.g. "Ruth 1:16", or "rev 22", or "1 kings 2:3-6") or a verse id (e.g. "01001001" BBCCCVVV)
+  const cleanedStr = escapeSql(str.trim());
+  const id = parseInt(cleanedStr, 10);
+  if (isValidId(id)) return id;
+  const [book, chapter, verse] = getRefFromString(cleanedStr);
+  if (book === -1) return -1;
+  return getIdFromRef(book, chapter, verse);
+}
 
 export function getStringFromId(id: VerseId): string {
   return id.toString().padStart(8, "0");
@@ -38,14 +67,14 @@ export function getRefFromHex(hexColorString: string): BibleRef {
   return [hexBook, hexChapter, hexVerse];
 }
 
-export function getIdFromRef(book: number, chapter: number, verse: number): VerseId | undefined {
+export function getIdFromRef(book: number, chapter: number, verse: number): VerseId | -1 {
   // BBCCCVVV
   const bookStr = book.toString().padStart(2, "0");
   const chapterStr = chapter.toString().padStart(3, "0");
   const verseStr = verse.toString().padStart(3, "0");
   const id = parseInt(`${bookStr}${chapterStr}${verseStr}`, 10);
   if (isValidId(id)) return id;
-  return undefined;
+  return -1;
 }
 
 export function getRefFromId(id: VerseId): BibleRef {
@@ -282,7 +311,7 @@ export function setParamsWithoutReload(params: Partial<ApiParams>, url: URL | st
       );
     }
   }
-  window.history.pushState(null, "", newUrl.toString());
+  globalThis.history.pushState(null, "", newUrl.toString());
   return newUrl;
 }
 
@@ -303,4 +332,21 @@ export function deleteInessentialsFromUrl(url: URL | string): URL {
   newUrl.searchParams.delete(SQ_KEYS.CURRENT);
   newUrl.searchParams.delete(SQ_KEYS.RESUME);
   return newUrl;
+}
+
+export function setOrRemoveFromStorage(key: LS_KEYS, value?: string) {
+  if (value) {
+    localStorage?.setItem(key, value);
+  } else {
+    localStorage?.removeItem(key);
+  }
+}
+
+export function getLastNElements(type: string, n = 1, from: Document | Element = document) {
+  if (!from) return [];
+  const res = [];
+  for (let i = 0; i < n; i++) {
+    res.push(from.querySelector(`${type}:nth-last-of-type(${i})`));
+  }
+  return res;
 }

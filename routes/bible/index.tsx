@@ -4,12 +4,13 @@ import AppContainer from "@components/AppContainer.tsx";
 import { TopFade } from "@components/TopFade.tsx";
 import { getExtrasForVerses, getPageOfVerses } from "@db";
 import Carousel from "@islands/Carousel.tsx";
-import Resumer from "@islands/Resumer.tsx";
+import Searcher from "@islands/Searcher.tsx";
 import { $currentUrl, $currentVerse } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, Verse, VerseId } from "@lib/types.ts";
 import { createPartialFeedUrls, getApiParamsFromUrl, getIdFromKvEntry, memoizeWithLimitedHistory } from "@lib/utils.ts";
 import NavBar from "../../islands/NavBar.tsx";
 import Toolbar from "../../islands/Toolbar/Toolbar.tsx";
+import Resumer from "../../islands/super/Resumer.tsx";
 
 const getVerses = async (params: ApiParams): Promise<[verses: Verse[], iter: Deno.KvListIterator<string>]> => {
   const iter = await getPageOfVerses(params);
@@ -58,8 +59,9 @@ export default function Bible(props: PageProps<ApiResponse>) {
     <AppContainer>
       <main role="main" className="min-w-0 min-h-0 w-full h-full" f-client-nav>
         <Resumer res={data} />
-        <Toolbar />
         <TopFade />
+        <Toolbar />
+        <Searcher />
         <div
           role="feed"
           aria-busy="false" // TODO: need to trigger this on load

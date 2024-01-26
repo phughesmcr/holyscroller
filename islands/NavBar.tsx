@@ -4,7 +4,7 @@ import { effect } from "@preact/signals";
 import IconBible from "icons/bible.tsx";
 import IconMessageChatbot from "icons/message-chatbot.tsx";
 import IconMusicHeart from "icons/music-heart.tsx";
-import IconZoomQuestion from "icons/zoom-question.tsx";
+import IconSchool from "icons/school.tsx";
 import { useRef } from "preact/hooks";
 import NavButton from "../components/NavButton.tsx";
 
@@ -75,7 +75,7 @@ export default function NavBar() {
           innerText="Catechism"
           f-client-nav={false}
         >
-          <IconZoomQuestion className="w-5 h-5" />
+          <IconSchool className="w-5 h-5" />
         </NavButton>
       </nav>
     </div>

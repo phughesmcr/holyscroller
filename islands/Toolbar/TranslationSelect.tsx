@@ -29,7 +29,7 @@ export default function TranslationSelect() {
   return (
     <div className="w-3/12 min-w-[5ch]">
       <Label htmlFor="translation-select">
-        <span class="truncate">
+        <span className="truncate">
           Trans.
         </span>
         <Select
@@ -51,7 +51,7 @@ export default function TranslationSelect() {
                 aria-label={title}
                 selected={value === $currentTranslation.value}
                 value={value}
-                class="truncate"
+                className="truncate"
               >
                 {flag && <span className="flag-icon">{flag}&nbsp;</span>}
                 {innerText}

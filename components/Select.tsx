@@ -6,7 +6,7 @@ export function Select(props: JSX.HTMLAttributes<HTMLSelectElement>) {
     <select
       {...props}
       disabled={!IS_BROWSER || props.disabled}
-      class={`px-2 py-1 rounded-full text-black bg-white hover:bg-gray-200 transition-colors w-full h-full shrink`}
+      className={`px-2 py-1 rounded-full text-black bg-white hover:bg-gray-200 transition-colors w-full h-full shrink`}
     />
   );
 }

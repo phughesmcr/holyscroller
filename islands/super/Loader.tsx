@@ -27,10 +27,9 @@ export default function Loader() {
   };
 
   useEffect(() => {
-    const { window } = globalThis; // stops typescript complaining
-    window.addEventListener("load", handleLoading, { passive: true });
+    globalThis.addEventListener("load", handleLoading, { passive: true });
     setTimeout(handleLoading, 1000);
-    return () => window.removeEventListener("load", handleLoading);
+    return () => globalThis.removeEventListener("load", handleLoading);
   }, []);
 
   return (
