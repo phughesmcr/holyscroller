@@ -1,4 +1,6 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
+import { SQ_KEYS } from "@lib/constants.ts";
+import { getIdFromString } from "@lib/utils.ts";
 import IconSearch from "icons/search.tsx";
 import { useRef } from "preact/hooks";
 
@@ -7,6 +9,7 @@ export default function Searcher() {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const showModal = () => {
     dialogRef.current?.showModal();
@@ -17,6 +20,12 @@ export default function Searcher() {
   };
 
   const handleSearch = () => {
+    const id = getIdFromString(inputRef.current?.value ?? "");
+    if (id === -1 || !id) {
+      alert("Not found!");
+      return;
+    }
+    location.href = `/bible?${SQ_KEYS.START_FROM}=${id}`;
     closeModal();
   };
 
@@ -29,13 +38,13 @@ export default function Searcher() {
         </button>
       </div>
 
-      <dialog ref={dialogRef} className="modal max-w-[65%] p-2 rounded">
+      <dialog ref={dialogRef} className="modal max-w-[65%] p-4 rounded bg-zinc-100">
         <form method="dialog" className="flex flex-col gap-2 items-center justify-center">
           <label htmlFor="search">Search for Verse</label>
           <small>
             E.g. <q>Ruth 1:16</q> or <q>43003016</q>
           </small>
-          <input type="search" id="search" onSearch={handleSearch} />
+          <input type="search" id="search" ref={inputRef} onSearch={handleSearch} />
           <button
             type="button"
             className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full cursor-pointer"
@@ -45,7 +54,7 @@ export default function Searcher() {
           </button>
           <button
             type="reset"
-            className="w-full bg-red-400 hover:bg-red-700 text-black font-bold py-2 px-4 rounded-full cursor-pointer"
+            className="w-full bg-red-400 hover:bg-red-500 text-black font-bold py-2 px-4 rounded-full cursor-pointer"
             onClick={closeModal}
           >
             Cancel
