@@ -304,3 +304,11 @@ export function deleteInessentialsFromUrl(url: URL | string): URL {
   newUrl.searchParams.delete(SQ_KEYS.RESUME);
   return newUrl;
 }
+
+export function setOrRemoveFromStorage(key: LS_KEYS, value?: string) {
+  if (value) {
+    localStorage?.setItem(key, value);
+  } else {
+    localStorage?.removeItem(key);
+  }
+}

@@ -3,7 +3,7 @@ import { getPericopeFromIdMemoized } from "@data";
 import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, LS_KEYS, SQ_KEYS } from "@lib/constants.ts";
 import { $currentParams, $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, VerseId } from "@lib/types.ts";
-import { debounce, getRefFromId } from "@lib/utils.ts";
+import { debounce, getRefFromId, setOrRemoveFromStorage } from "@lib/utils.ts";
 import { effect, useSignal } from "@preact/signals";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import Article from "../components/Article.tsx";
@@ -12,32 +12,29 @@ type CarouselProps = {
   res: ApiResponse;
 };
 
+const DEBOUNCE_TIMER_MS = 200 as const;
+const SET_PARAMS_TIMER_MS = 300 as const;
+
 export default function Carousel({ res }: CarouselProps) {
   if (!IS_BROWSER) return <></>;
 
-  const { verses = [], pageSize = API_DEFAULT_PAGE_SIZE, translation = API_DEFAULT_TRANSLATION, next, extras, resume } =
-    res;
+  const {
+    extras,
+    next,
+    pageSize = API_DEFAULT_PAGE_SIZE,
+    resume = false,
+    translation = API_DEFAULT_TRANSLATION,
+    verses = [],
+  } = res;
 
   const updateFromParams = useCallback((params: ApiParams) => {
     // set params in local storage
     const { translation, startFrom, endAt, cursor, pageSize } = params;
     localStorage?.setItem(LS_KEYS.TRANSLATION, translation);
     localStorage?.setItem(LS_KEYS.PAGE_SIZE, pageSize.toString());
-    if (startFrom) {
-      localStorage?.setItem(LS_KEYS.START_FROM, startFrom.toString());
-    } else {
-      localStorage?.removeItem(LS_KEYS.START_FROM);
-    }
-    if (endAt) {
-      localStorage?.setItem(LS_KEYS.END_AT, endAt.toString());
-    } else {
-      localStorage?.removeItem(LS_KEYS.END_AT);
-    }
-    if (cursor) {
-      localStorage?.setItem(LS_KEYS.CURSOR, cursor);
-    } else {
-      localStorage?.removeItem(LS_KEYS.CURSOR);
-    }
+    setOrRemoveFromStorage(LS_KEYS.START_FROM, startFrom?.toString());
+    setOrRemoveFromStorage(LS_KEYS.END_AT, endAt?.toString());
+    setOrRemoveFromStorage(LS_KEYS.CURSOR, cursor?.toString());
   }, []);
 
   effect(() => {
@@ -47,11 +44,7 @@ export default function Carousel({ res }: CarouselProps) {
   });
 
   const updateFromVerse = useCallback((id: VerseId) => {
-    if (id) {
-      localStorage?.setItem(LS_KEYS.START_FROM, id.toString());
-    } else {
-      localStorage?.removeItem(LS_KEYS.START_FROM);
-    }
+    setOrRemoveFromStorage(LS_KEYS.START_FROM, id.toString());
   }, []);
 
   effect(() => {
@@ -70,7 +63,7 @@ export default function Carousel({ res }: CarouselProps) {
         newUrl.searchParams.set(SQ_KEYS.CURRENT, `${id}`);
         window.history.pushState(null, "", newUrl.toString());
       }
-    }, 300),
+    }, SET_PARAMS_TIMER_MS),
     [],
   );
 
@@ -80,7 +73,7 @@ export default function Carousel({ res }: CarouselProps) {
 
   // START: SCROLLING OBSERVER
 
-  const hasTriggered = useSignal(false);
+  const hasTriggered = useSignal<boolean>(false);
   const nextAnchor = useRef<HTMLAnchorElement>(null);
 
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
@@ -103,7 +96,7 @@ export default function Carousel({ res }: CarouselProps) {
           nextAnchor.current?.click();
         }
       }
-    }, 200);
+    }, DEBOUNCE_TIMER_MS);
 
     debounced();
   }, [observerRef.current]);
