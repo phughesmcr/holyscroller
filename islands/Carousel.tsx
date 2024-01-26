@@ -106,7 +106,8 @@ export default function Carousel({ res }: CarouselProps) {
   }, DEBOUNCE_TIMER_MS);
 
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
-    const triggerPoints = getLastNElements("article", 3).filter(Boolean).reverse();
+    const nTriggerPoints = Math.ceil(($currentParams.peek()?.pageSize || API_DEFAULT_PAGE_SIZE) / 2);
+    const triggerPoints = getLastNElements("article", nTriggerPoints).filter(Boolean).reverse();
     scrollHandler(triggerPoints, entry);
   }, [observerRef.current]);
 
@@ -128,7 +129,7 @@ export default function Carousel({ res }: CarouselProps) {
     };
   }, [handleScrollIntoView]);
 
-  // END: SCROLLING OBSERVER
+  //#endregion
 
   return (
     <>
