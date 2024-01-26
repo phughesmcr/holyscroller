@@ -25,7 +25,11 @@
       "default",
       {
         "ignore": [
-          "-webkit-overflow-scrolling"
+          "-webkit-overflow-scrolling",
+          "scrollbar-width",
+          "overscroll-behavior",
+          "-webkit-tap-highlight-color",
+          "backdrop-filter"
         ]
       }
     ]
