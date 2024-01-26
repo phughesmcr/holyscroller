@@ -58,11 +58,10 @@ export default function Carousel({ res }: CarouselProps) {
   const setParams = useCallback(
     debounce((id: number) => {
       const value = $currentUrl.peek();
-      if (value) {
-        const newUrl = new URL(value);
-        newUrl.searchParams.set(SQ_KEYS.CURRENT, `${id}`);
-        window.history.pushState(null, "", newUrl.toString());
-      }
+      if (!value) return;
+      const newUrl = new URL(value);
+      newUrl.searchParams.set(SQ_KEYS.CURRENT, `${id}`);
+      globalThis.history.pushState(null, "", newUrl.toString());
     }, SET_PARAMS_TIMER_MS),
     [],
   );

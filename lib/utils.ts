@@ -282,7 +282,7 @@ export function setParamsWithoutReload(params: Partial<ApiParams>, url: URL | st
       );
     }
   }
-  window.history.pushState(null, "", newUrl.toString());
+  globalThis.history.pushState(null, "", newUrl.toString());
   return newUrl;
 }
 
