@@ -1,6 +1,6 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { SQ_KEYS } from "@lib/constants.ts";
-import { getIdFromString } from "@lib/utils.ts";
+import { deleteInessentialsFromUrl, getIdFromString } from "@lib/utils.ts";
 import IconSearch from "icons/search.tsx";
 import { useRef } from "preact/hooks";
 
@@ -25,8 +25,10 @@ export default function Searcher() {
       alert("Not found!");
       return;
     }
-    location.href = `/bible?${SQ_KEYS.START_FROM}=${id}`;
     closeModal();
+    const newUrl = deleteInessentialsFromUrl(globalThis.location.href);
+    newUrl.searchParams.set(SQ_KEYS.START_FROM, id.toString());
+    location.href = newUrl.toString();
   };
 
   return (
