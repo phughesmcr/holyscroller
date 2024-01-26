@@ -20,6 +20,14 @@
         "aria-allowed-attr": "off",
         "aria-required-children": "off"
       }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "-webkit-overflow-scrolling"
+        ]
+      }
     ]
   }
 }

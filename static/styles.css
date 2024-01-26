@@ -170,3 +170,12 @@ a[aria-current='page'] {
 .overscroll-touch {
   -webkit-overflow-scrolling: touch;
 }
+
+#searcher {
+  bottom: calc(var(--navbar-height) + 1rem);
+}
+.modal::backdrop {
+  background-color: rgba(0 , 0, 0, 0.4);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}

@@ -12,11 +12,8 @@ import * as $catechism_index from "./routes/catechism/index.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $partials_feed from "./routes/partials/feed.tsx";
 import * as $Carousel from "./islands/Carousel.tsx";
-import * as $Fab from "./islands/super/Fab.tsx";
-import * as $Loader from "./islands/super/Loader.tsx";
 import * as $NavBar from "./islands/NavBar.tsx";
-import * as $Onboarding from "./islands/super/Onboarding.tsx";
-import * as $Resumer from "./islands/super/Resumer.tsx";
+import * as $Searcher from "./islands/Searcher.tsx";
 import * as $Toolbar_BookSelect from "./islands/Toolbar/BookSelect.tsx";
 import * as $Toolbar_PericopeSelect from "./islands/Toolbar/PericopeSelect.tsx";
 import * as $Toolbar_Toolbar from "./islands/Toolbar/Toolbar.tsx";
@@ -41,11 +38,8 @@ const manifest = {
   },
   islands: {
     "./islands/Carousel.tsx": $Carousel,
-    "./islands/Fab.tsx": $Fab,
-    "./islands/Loader.tsx": $Loader,
     "./islands/NavBar.tsx": $NavBar,
-    "./islands/Onboarding.tsx": $Onboarding,
-    "./islands/Resumer.tsx": $Resumer,
+    "./islands/Searcher.tsx": $Searcher,
     "./islands/Toolbar/BookSelect.tsx": $Toolbar_BookSelect,
     "./islands/Toolbar/PericopeSelect.tsx": $Toolbar_PericopeSelect,
     "./islands/Toolbar/Toolbar.tsx": $Toolbar_Toolbar,
