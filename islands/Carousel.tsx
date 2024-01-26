@@ -84,8 +84,9 @@ export default function Carousel({ res }: CarouselProps) {
   const nextAnchor = useRef<HTMLAnchorElement>(null);
 
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
-    // hasTriggered.value = false;
-    const triggerPoint = document.querySelector("article:nth-last-of-type(3)");
+    const triggerPoints = [3, 2, 1]
+      .map((i) => document.querySelector(`article:nth-last-of-type(${i})`))
+      .filter(Boolean);
 
     const debounced = debounce(() => {
       if (entry.isIntersecting) {
@@ -97,11 +98,9 @@ export default function Carousel({ res }: CarouselProps) {
           $currentVerse.value = vid;
           setParams(vid);
         }
-        if (target === triggerPoint) {
-          if (!hasTriggered.value) {
-            hasTriggered.value = true;
-            nextAnchor.current?.click();
-          }
+        if (triggerPoints.includes(target) && !hasTriggered.value) {
+          hasTriggered.value = true;
+          nextAnchor.current?.click();
         }
       }
     }, 200);
