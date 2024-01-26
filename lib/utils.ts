@@ -312,3 +312,12 @@ export function setOrRemoveFromStorage(key: LS_KEYS, value?: string) {
     localStorage?.removeItem(key);
   }
 }
+
+export function getLastNElements(type: string, n = 1, from: Document | Element = document) {
+  if (!from) return [];
+  const res = [];
+  for (let i = 0; i < n; i++) {
+    res.push(from.querySelector(`${type}:nth-last-of-type(${i})`));
+  }
+  return res;
+}

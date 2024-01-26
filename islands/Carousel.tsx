@@ -3,7 +3,7 @@ import { getPericopeFromIdMemoized } from "@data";
 import { API_DEFAULT_PAGE_SIZE, API_DEFAULT_TRANSLATION, DATASET_VID, LS_KEYS, SQ_KEYS } from "@lib/constants.ts";
 import { $currentParams, $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, VerseId } from "@lib/types.ts";
-import { debounce, getRefFromId, setOrRemoveFromStorage } from "@lib/utils.ts";
+import { debounce, getLastNElements, getRefFromId, isValidId, setOrRemoveFromStorage } from "@lib/utils.ts";
 import { effect, useSignal } from "@preact/signals";
 import { useCallback, useEffect, useRef } from "preact/hooks";
 import Article from "../components/Article.tsx";
@@ -27,8 +27,17 @@ export default function Carousel({ res }: CarouselProps) {
     verses = [],
   } = res;
 
-  const updateFromParams = useCallback((params: ApiParams) => {
-    // set params in local storage
+  const hasTriggered = useSignal<boolean>(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const nextAnchorRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    $isLoading.value = false;
+  }, []);
+
+  //#region currentParams.value update
+
+  const updateLSFromParams = useCallback((params: ApiParams) => {
     const { translation, startFrom, endAt, cursor, pageSize } = params;
     localStorage?.setItem(LS_KEYS.TRANSLATION, translation);
     localStorage?.setItem(LS_KEYS.PAGE_SIZE, pageSize.toString());
@@ -39,21 +48,27 @@ export default function Carousel({ res }: CarouselProps) {
 
   effect(() => {
     const params = $currentParams.value;
-    if (params === null || !IS_BROWSER) return;
-    updateFromParams(params);
+    if (!params) return;
+    updateLSFromParams(params);
   });
 
-  const updateFromVerse = useCallback((id: VerseId) => {
+  //#endregion
+
+  //#region currentVerse.value update
+
+  const updateLSFromVerse = useCallback((id: VerseId) => {
     setOrRemoveFromStorage(LS_KEYS.START_FROM, id.toString());
   }, []);
 
   effect(() => {
     const startFrom = $currentVerse.value;
     if (!startFrom || !IS_BROWSER) return;
-    updateFromVerse(startFrom);
+    updateLSFromVerse(startFrom);
   });
 
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  //#endregion
+
+  //#region scroll observer
 
   const setParams = useCallback(
     debounce((id: number) => {
@@ -66,38 +81,33 @@ export default function Carousel({ res }: CarouselProps) {
     [],
   );
 
-  useEffect(() => {
-    $isLoading.value = false;
-  }, []);
+  const setParamsFromId = (id: string) => {
+    const vid = parseInt(id, 10) as VerseId;
+    if (!isValidId(vid)) return;
+    $currentVerse.value = vid;
+    setParams(vid);
+  };
 
-  // START: SCROLLING OBSERVER
+  const triggerLoad = () => {
+    hasTriggered.value = true;
+    nextAnchorRef.current?.click();
+  };
 
-  const hasTriggered = useSignal<boolean>(false);
-  const nextAnchor = useRef<HTMLAnchorElement>(null);
+  const scrollHandler = debounce((triggerPoints: Element[], entry: IntersectionObserverEntry) => {
+    if (!entry.target || !entry.isIntersecting) return;
+    const target = entry.target as HTMLDivElement;
+    const id = target.dataset[DATASET_VID];
+    if (id) {
+      setParamsFromId(id);
+    }
+    if (triggerPoints.includes(target) && !hasTriggered.value) {
+      triggerLoad();
+    }
+  }, DEBOUNCE_TIMER_MS);
 
   const handleScrollIntoView = useCallback((entry: IntersectionObserverEntry) => {
-    const triggerPoints = [3, 2, 1]
-      .map((i) => document.querySelector(`article:nth-last-of-type(${i})`))
-      .filter(Boolean);
-
-    const debounced = debounce(() => {
-      if (entry.isIntersecting) {
-        const { target } = entry;
-        if (!target) return;
-        const id = (target as HTMLDivElement).dataset[DATASET_VID];
-        if (id) {
-          const vid = parseInt(id, 10) as VerseId;
-          $currentVerse.value = vid;
-          setParams(vid);
-        }
-        if (triggerPoints.includes(target) && !hasTriggered.value) {
-          hasTriggered.value = true;
-          nextAnchor.current?.click();
-        }
-      }
-    }, DEBOUNCE_TIMER_MS);
-
-    debounced();
+    const triggerPoints = getLastNElements("article", 3).filter(Boolean).reverse();
+    scrollHandler(triggerPoints, entry);
   }, [observerRef.current]);
 
   useEffect(() => {
@@ -140,7 +150,7 @@ export default function Carousel({ res }: CarouselProps) {
         );
       })}
       {next && (
-        <a className="hidden" ref={nextAnchor} href={next.url.toString()} f-partial={next.fp.toString()}>
+        <a className="hidden" ref={nextAnchorRef} href={next.url.toString()} f-partial={next.fp.toString()}>
           <span className="sr-only">Load More</span>
         </a>
       )}
