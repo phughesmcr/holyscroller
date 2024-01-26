@@ -5,7 +5,7 @@ import { TopFade } from "@components/TopFade.tsx";
 import { getExtrasForVerses, getPageOfVerses } from "@db";
 import Carousel from "@islands/Carousel.tsx";
 import Searcher from "@islands/Searcher.tsx";
-import { $currentUrl, $currentVerse } from "@lib/state.ts";
+import { $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, Verse, VerseId } from "@lib/types.ts";
 import { createPartialFeedUrls, getApiParamsFromUrl, getIdFromKvEntry, memoizeWithLimitedHistory } from "@lib/utils.ts";
 import NavBar from "../../islands/NavBar.tsx";
@@ -64,7 +64,7 @@ export default function Bible(props: PageProps<ApiResponse>) {
         <Searcher />
         <div
           role="feed"
-          aria-busy="false" // TODO: need to trigger this on load
+          aria-busy={$isLoading.value}
           className="w-full h-full overflow-x-hidden overflow-y-auto hide-scrollbars touch-pan-y snap-y snap-mandatory p-2 overscroll-touch"
         >
           <Partial name="carousel" mode="append">
