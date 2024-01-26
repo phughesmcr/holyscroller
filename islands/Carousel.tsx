@@ -141,7 +141,7 @@ export default function Carousel({ res }: CarouselProps) {
         );
       })}
       {next && (
-        <a class="hidden" ref={nextAnchor} href={next.url.toString()} f-partial={next.fp.toString()}>
+        <a className="hidden" ref={nextAnchor} href={next.url.toString()} f-partial={next.fp.toString()}>
           <span className="sr-only">Load More</span>
         </a>
       )}
