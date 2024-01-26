@@ -4,7 +4,7 @@ import AppContainer from "@components/AppContainer.tsx";
 import { TopFade } from "@components/TopFade.tsx";
 import { getExtrasForVerses, getPageOfVerses } from "@db";
 import Carousel from "@islands/Carousel.tsx";
-import Resumer from "@islands/Resumer.tsx";
+import Resumer from "../../islands/super/Resumer.tsx";
 import { $currentUrl, $currentVerse } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, Verse, VerseId } from "@lib/types.ts";
 import { createPartialFeedUrls, getApiParamsFromUrl, getIdFromKvEntry, memoizeWithLimitedHistory } from "@lib/utils.ts";

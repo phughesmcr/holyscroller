@@ -1,7 +1,7 @@
 import { Partial } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import { TopFade } from "@components/TopFade.tsx";
-import Resumer from "@islands/Resumer.tsx";
+import Resumer from "../../islands/super/Resumer.tsx";
 import { $isLoading } from "@lib/state.ts";
 import type { ApiResponse } from "@lib/types.ts";
 import AppContainer from "../../components/AppContainer.tsx";
