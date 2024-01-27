@@ -121,6 +121,10 @@ export default function Carousel({ res }: CarouselProps) {
       observerRef.current?.observe(article);
     });
 
+    //set initial params
+    const initialId = articles[0]?.dataset[DATASET_VID];
+    if (initialId && isValidId(Number(initialId))) setParamsFromId(initialId);
+
     return () => {
       if (observerRef.current) {
         articles.forEach((article) => observerRef.current?.unobserve(article));
