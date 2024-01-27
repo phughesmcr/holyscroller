@@ -72,7 +72,7 @@ export const getExtrasForVerses: (verses: Verse[]) => Promise<VerseExtras> = asy
   verses: Verse[],
   _t = API_DEFAULT_TRANSLATION,
 ): Promise<VerseExtras> => {
-  const res: VerseExtras = { books: {}, crossRefs: {}, pericopes: {} };
+  const res: VerseExtras = { books: {}, pericopes: {} };
 
   // BOOKS & BOOK PERICOPES
   const books = [...new Set(verses.map(([id, _text]) => parseInt(id.toString().padStart(8, "0").substring(0, 2), 10)))];

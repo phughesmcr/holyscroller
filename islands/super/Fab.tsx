@@ -15,7 +15,7 @@ export default function Fab() {
       $fabUrl.value = url;
     };
     const errorCallback: PositionErrorCallback = (error: GeolocationPositionError) => {
-      console.log(error);
+      console.error(error);
     };
     navigator?.geolocation?.getCurrentPosition(successCallback, errorCallback);
   }, []);

@@ -5,7 +5,7 @@ import { TopFade } from "@components/TopFade.tsx";
 import { getExtrasForVerses, getPageOfVerses } from "@db";
 import Carousel from "@islands/Carousel.tsx";
 import Searcher from "@islands/Searcher.tsx";
-import { $currentUrl, $currentVerse } from "@lib/state.ts";
+import { $currentUrl, $currentVerse, $isLoading } from "@lib/state.ts";
 import type { ApiParams, ApiResponse, Verse, VerseId } from "@lib/types.ts";
 import { createPartialFeedUrls, getApiParamsFromUrl, getIdFromKvEntry, memoizeWithLimitedHistory } from "@lib/utils.ts";
 import NavBar from "../../islands/NavBar.tsx";
@@ -41,6 +41,7 @@ export const handler: Handlers<ApiResponse | null> = {
     try {
       const res = await createResponseMemoized(req.url.toString());
       $currentUrl.value = new URL(res.origin);
+      $currentVerse.value = res.verses[0][0] as VerseId;
       return ctx.render(res);
     } catch (err) {
       console.error(err);
@@ -52,9 +53,6 @@ export const handler: Handlers<ApiResponse | null> = {
 export default function Bible(props: PageProps<ApiResponse>) {
   const { data } = props;
 
-  // update signals based on response
-  $currentVerse.value = data.verses[0][0] as VerseId;
-
   return (
     <AppContainer>
       <main role="main" className="min-w-0 min-h-0 w-full h-full" f-client-nav>
@@ -64,7 +62,7 @@ export default function Bible(props: PageProps<ApiResponse>) {
         <Searcher />
         <div
           role="feed"
-          aria-busy="false" // TODO: need to trigger this on load
+          aria-busy={$isLoading.value}
           className="w-full h-full overflow-x-hidden overflow-y-auto hide-scrollbars touch-pan-y snap-y snap-mandatory p-2 overscroll-touch"
         >
           <Partial name="carousel" mode="append">

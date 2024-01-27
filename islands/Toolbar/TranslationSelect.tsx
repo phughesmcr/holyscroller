@@ -1,27 +1,39 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Label } from "@components/Label.tsx";
 import { Select } from "@components/Select.tsx";
-import { LINK_CANONICAL, SQ_KEYS, TRANSLATIONS } from "@lib/constants.ts";
-import { $currentTranslation, $currentUrl } from "@lib/state.ts";
-import { generateId } from "@lib/utils.ts";
-import { effect } from "@preact/signals";
+import { API_DEFAULT_TRANSLATION, LINK_CANONICAL, SQ_KEYS, TRANSLATIONS } from "@lib/constants.ts";
+import { $currentParams, $currentUrl } from "@lib/state.ts";
+import { effect, useSignal } from "@preact/signals";
+import { escapeSql } from "escape";
 import type { JSX } from "preact";
-import { useRef } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
 
 export default function TranslationSelect() {
   if (!IS_BROWSER) return <></>;
 
+  const selectedTranslation = useSignal("");
   const selectRef = useRef<HTMLSelectElement>(null);
 
   effect(() => {
-    const value = $currentTranslation.value;
-    if (!value || !selectRef.current) return;
-    selectRef.current.value = value;
+    const translation = $currentParams.value?.translation || API_DEFAULT_TRANSLATION;
+    if (selectRef.current) {
+      selectedTranslation.value = translation;
+      selectRef.current.value = translation;
+    }
   });
+
+  useEffect(() => {
+    const translation = $currentParams.value?.translation || API_DEFAULT_TRANSLATION;
+    if (selectRef.current) {
+      selectedTranslation.value = translation;
+      selectRef.current.value = translation;
+    }
+  }, []);
 
   const changeTranslation = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
     const res = new URL($currentUrl.peek() ?? location?.href ?? LINK_CANONICAL);
-    res.searchParams.set(SQ_KEYS.TRANSLATION, e.currentTarget.value);
+    const selection = escapeSql(e.currentTarget.value);
+    res.searchParams.set(SQ_KEYS.TRANSLATION, selection);
     $currentUrl.value = res;
     location.href = res.toString();
   };
@@ -33,14 +45,13 @@ export default function TranslationSelect() {
           Trans.
         </span>
         <Select
+          aria-label="Choose a bible translation"
+          id="translation-select"
+          name="translation-select"
+          onChange={changeTranslation}
           ref={selectRef}
           title="Bible Translation"
-          aria-label="Choose a bible translation"
-          name="translation-select"
-          id="translation-select"
-          onChange={changeTranslation}
-          value={$currentTranslation.value}
-          key={generateId()}
+          value={selectedTranslation.value}
         >
           {TRANSLATIONS.map((trans) => {
             const { flag, innerText, title, value } = trans;
@@ -49,9 +60,8 @@ export default function TranslationSelect() {
                 key={value}
                 title={title}
                 aria-label={title}
-                selected={value === $currentTranslation.value}
+                selected={value === selectedTranslation.value}
                 value={value}
-                className="truncate"
               >
                 {flag && <span className="flag-icon">{flag}&nbsp;</span>}
                 {innerText}
