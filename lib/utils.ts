@@ -29,7 +29,7 @@ export function getRefFromString(str: string): BibleRef | [-1, -1, -1] {
     return [-1, -1, -1];
   }
   const book = getBookIdFromTitle(match.groups?.book || "");
-  if (!book) return [-1, -1, -1];
+  if (book === undefined) return [-1, -1, -1];
   const chapter = parseInt(match.groups?.chapter || "1", 10);
   const verse = parseInt(match.groups?.verse || "1", 10);
   return [book, chapter, verse];
