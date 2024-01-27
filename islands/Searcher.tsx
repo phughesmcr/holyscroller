@@ -1,8 +1,9 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { SQ_KEYS } from "@lib/constants.ts";
+import { LINK_CANONICAL, SQ_KEYS } from "@lib/constants.ts";
 import { deleteInessentialsFromUrl, getIdFromString } from "@lib/utils.ts";
 import IconSearch from "icons/search.tsx";
 import { useRef } from "preact/hooks";
+import { $currentUrl } from "@lib/state.ts";
 
 export default function Searcher() {
   if (!IS_BROWSER) return <></>;
@@ -26,7 +27,7 @@ export default function Searcher() {
       return;
     }
     closeModal();
-    const newUrl = deleteInessentialsFromUrl(globalThis.location.href);
+    const newUrl = deleteInessentialsFromUrl($currentUrl.peek() ?? location?.href ?? LINK_CANONICAL);
     newUrl.searchParams.set(SQ_KEYS.START_FROM, id.toString());
     location.href = newUrl.toString();
   };
