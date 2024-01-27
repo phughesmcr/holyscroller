@@ -41,6 +41,7 @@ export const handler: Handlers<ApiResponse | null> = {
     try {
       const res = await createResponseMemoized(req.url.toString());
       $currentUrl.value = new URL(res.origin);
+      $currentVerse.value = res.verses[0][0] as VerseId;
       return ctx.render(res);
     } catch (err) {
       console.error(err);
@@ -51,9 +52,6 @@ export const handler: Handlers<ApiResponse | null> = {
 
 export default function Bible(props: PageProps<ApiResponse>) {
   const { data } = props;
-
-  // update signals based on response
-  $currentVerse.value = data.verses[0][0] as VerseId;
 
   return (
     <AppContainer>
