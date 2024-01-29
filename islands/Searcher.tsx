@@ -97,7 +97,7 @@ export default function Searcher() {
 
   return (
     <>
-      <div id="searcher" className="absolute right-2 z-20 cursor-pointer">
+      <div id="searcher" className="absolute top-4 right-4 z-20 cursor-pointer">
         <button type="button" ref={buttonRef} onClick={showModal} className="bg-transparent">
           <IconSearch className="w-8 h-8" />
           <span className="sr-only">Search for Verse</span>
@@ -108,7 +108,7 @@ export default function Searcher() {
         <form method="dialog" className="flex flex-col gap-2 items-center justify-center">
           <label htmlFor="search">Search for Verse</label>
           <small>
-            E.g. <q>Ruth 1:16</q> or <q>43003016</q>
+            E.g. <q>John 3:16</q> or <q>2 Kings 7:1</q>
           </small>
           <input type="search" id="search" className="w-full" ref={inputRef} onSearch={handleSearch} />
           <button

@@ -22,14 +22,14 @@ export default function Article(props: ArticleProps) {
       tabIndex={0}
       className="ui w-full h-full snap-start snap-always"
     >
-      <div className="info shadow-sm w-full" tabIndex={0}>
+      <div className="info pl-2 shadow-sm w-full" tabIndex={0}>
         <h1 title="Book Title" aria-label="Book Title">{v === 1 ? bookInfo.title_full : bookInfo.title_short}</h1>
         <h2 title="Book reference" aria-label="Book reference">Chapter {c} - Verse {v}</h2>
         <h3 title="Pericope title" aria-label="Pericope title">{pericope}</h3>
         <p>
           #<span title={bookInfo.otnt === "OT" ? "Old Testament" : "New Testament"}>{bookInfo.otnt}</span>{" "}
-          #<span title={"Genre"}>{bookInfo.category.replace(/\s+/, "")}</span>{" "}
-          #<span title={"Translation"}>{translation.toUpperCase()}</span> #<span title={"Verse ID"}>{id}</span>
+          #<span title={"Genre"}>{bookInfo.category.replace(/(old|new) testament/gi, "").replace(/\s/g, "")}</span>{" "}
+          #<span title={"Translation"}>{translation.toUpperCase()}</span> {/* #<span title={"Verse ID"}>{id}</span> */}
         </p>
       </div>
       <p>{text}</p>
