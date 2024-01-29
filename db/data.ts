@@ -11,6 +11,20 @@ export const listOfBooks: [api: string, short: string][] = BOOK_INFO.map(({ titl
   return [title_short.replaceAll(/[^a-zA-Z0-9]/g, ""), title_short];
 });
 
+export const getNoOfChapters = (book: number): number => {
+  const bookInfo = BOOK_INFO[book];
+  if (!bookInfo) return NaN;
+  return bookInfo.chapters;
+};
+
+export const getNoOfVerses = (book: number, chapter: number): number => {
+  const bookInfo = BOOK_INFO[book];
+  if (!bookInfo) return NaN;
+  const chapterInfo = bookInfo.verses[chapter];
+  if (!chapterInfo) return NaN;
+  return chapterInfo;
+};
+
 export function getBookIdFromTitle(title: string): number | undefined {
   const norm = title.replace(/\s+/g, "");
   const pattern = new RegExp(`^${norm}$`, "gi");
