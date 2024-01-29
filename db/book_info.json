@@ -1,1 +1,721 @@
-[{"abbreviation":"Gen.","category":"Law","chapters":50,"order":1,"otnt":"OT","title_full":"The First Book of Moses Called Genesis","title_short":"Genesis"},{"abbreviation":"Ex.","category":"Law","chapters":40,"order":2,"otnt":"OT","title_full":"The Second Book of Moses Called Exodus","title_short":"Exodus"},{"abbreviation":"Lev.","category":"Law","chapters":27,"order":3,"otnt":"OT","title_full":"The Third Book of Moses Called Leviticus","title_short":"Leviticus"},{"abbreviation":"Num.","category":"Law","chapters":36,"order":4,"otnt":"OT","title_full":"The Fourth Book of Moses Called Numbers","title_short":"Numbers"},{"abbreviation":"Deut.","category":"Law","chapters":34,"order":5,"otnt":"OT","title_full":"The Fifth Book of Moses Called Deuteronomy","title_short":"Deuteronomy"},{"abbreviation":"Josh.","category":"Old Testament Narrative","chapters":24,"order":6,"otnt":"OT","title_full":"The Book of Joshua","title_short":"Joshua"},{"abbreviation":"Judg.","category":"Old Testament Narrative","chapters":21,"order":7,"otnt":"OT","title_full":"The Book of Judges","title_short":"Judges"},{"abbreviation":"Ruth","category":"Old Testament Narrative","chapters":4,"order":8,"otnt":"OT","title_full":"The Book of Ruth","title_short":"Ruth"},{"abbreviation":"1 Sam.","category":"Old Testament Narrative","chapters":31,"order":9,"otnt":"OT","title_full":"The First Book of Samuel","title_short":"1 Samuel"},{"abbreviation":"2 Sam.","category":"Old Testament Narrative","chapters":24,"order":10,"otnt":"OT","title_full":"The Second Book of Samuel","title_short":"2 Samuel"},{"abbreviation":"1 Kings","category":"Old Testament Narrative","chapters":22,"order":11,"otnt":"OT","title_full":"The First Book of Kings","title_short":"1 Kings"},{"abbreviation":"2 Kings","category":"Old Testament Narrative","chapters":25,"order":12,"otnt":"OT","title_full":"The Second Book of Kings","title_short":"2 Kings"},{"abbreviation":"1 Chron.","category":"Old Testament Narrative","chapters":29,"order":13,"otnt":"OT","title_full":"The First Book of Chronicles","title_short":"1 Chronicles"},{"abbreviation":"2 Chron.","category":"Old Testament Narrative","chapters":36,"order":14,"otnt":"OT","title_full":"The Second Book of Chronicles","title_short":"2 Chronicles"},{"abbreviation":"Ezra","category":"Old Testament Narrative","chapters":10,"order":15,"otnt":"OT","title_full":"The Book of Ezra","title_short":"Ezra"},{"abbreviation":"Neh.","category":"Old Testament Narrative","chapters":13,"order":16,"otnt":"OT","title_full":"The Book of Nehemiah","title_short":"Nehemiah"},{"abbreviation":"Est.","category":"Old Testament Narrative","chapters":10,"order":17,"otnt":"OT","title_full":"The Book of Esther","title_short":"Esther"},{"abbreviation":"Job","category":"Wisdom Literature","chapters":42,"order":18,"otnt":"OT","title_full":"The Book of Job","title_short":"Job"},{"abbreviation":"Ps.","category":"Wisdom Literature","chapters":150,"order":19,"otnt":"OT","title_full":"The Book of Psalms","title_short":"Psalms"},{"abbreviation":"Prov.","category":"Wisdom Literature","chapters":31,"order":20,"otnt":"OT","title_full":"The Book of Proverbs","title_short":"Proverbs"},{"abbreviation":"Eccles.","category":"Wisdom Literature","chapters":12,"order":21,"otnt":"OT","title_full":"The Book of Ecclesiastes","title_short":"Ecclesiastes"},{"abbreviation":"Song","category":"Wisdom Literature","chapters":8,"order":22,"otnt":"OT","title_full":"Song of Solomon","title_short":"Song of Solomon"},{"abbreviation":"Isa.","category":"Major Prophets","chapters":66,"order":23,"otnt":"OT","title_full":"The Book of Isaiah","title_short":"Isaiah"},{"abbreviation":"Jer.","category":"Major Prophets","chapters":52,"order":24,"otnt":"OT","title_full":"The Book of Jeremiah","title_short":"Jeremiah"},{"abbreviation":"Lam.","category":"Major Prophets","chapters":5,"order":25,"otnt":"OT","title_full":"The Book of Lamentations","title_short":"Lamentations"},{"abbreviation":"Ezek.","category":"Major Prophets","chapters":48,"order":26,"otnt":"OT","title_full":"The Book of Ezekiel","title_short":"Ezekiel"},{"abbreviation":"Dan.","category":"Major Prophets","chapters":12,"order":27,"otnt":"OT","title_full":"The Book of Daniel","title_short":"Daniel"},{"abbreviation":"Hos.","category":"Minor Prophets","chapters":14,"order":28,"otnt":"OT","title_full":"The Book of Hosea","title_short":"Hosea"},{"abbreviation":"Joel","category":"Minor Prophets","chapters":3,"order":29,"otnt":"OT","title_full":"The Book of Joel","title_short":"Joel"},{"abbreviation":"Amos","category":"Minor Prophets","chapters":9,"order":30,"otnt":"OT","title_full":"The Book of Amos","title_short":"Amos"},{"abbreviation":"Obad.","category":"Minor Prophets","chapters":1,"order":31,"otnt":"OT","title_full":"The Book of Obadiah","title_short":"Obadiah"},{"abbreviation":"Jonah","category":"Minor Prophets","chapters":4,"order":32,"otnt":"OT","title_full":"The Book of Jonah","title_short":"Jonah"},{"abbreviation":"Mic.","category":"Minor Prophets","chapters":7,"order":33,"otnt":"OT","title_full":"The Book of Micah","title_short":"Micah"},{"abbreviation":"Nah.","category":"Minor Prophets","chapters":3,"order":34,"otnt":"OT","title_full":"The Book of Nahum","title_short":"Nahum"},{"abbreviation":"Hab.","category":"Minor Prophets","chapters":3,"order":35,"otnt":"OT","title_full":"The Book of Habakkuk","title_short":"Habakkuk"},{"abbreviation":"Zeph.","category":"Minor Prophets","chapters":3,"order":36,"otnt":"OT","title_full":"The Book of Zephaniah","title_short":"Zephaniah"},{"abbreviation":"Hag.","category":"Minor Prophets","chapters":2,"order":37,"otnt":"OT","title_full":"The Book of Haggai","title_short":"Haggai"},{"abbreviation":"Zech.","category":"Minor Prophets","chapters":14,"order":38,"otnt":"OT","title_full":"The Book of Zechariah","title_short":"Zechariah"},{"abbreviation":"Mal.","category":"Minor Prophets","chapters":4,"order":39,"otnt":"OT","title_full":"The Book of Malachi","title_short":"Malachi"},{"abbreviation":"Matt.","category":"New Testament Narrative","chapters":28,"order":40,"otnt":"NT","title_full":"The Gospel According to Matthew","title_short":"Matthew"},{"abbreviation":"Mark","category":"New Testament Narrative","chapters":16,"order":41,"otnt":"NT","title_full":"The Gospel According to Mark","title_short":"Mark"},{"abbreviation":"Luke","category":"New Testament Narrative","chapters":24,"order":42,"otnt":"NT","title_full":"The Gospel According to Luke","title_short":"Luke"},{"abbreviation":"John","category":"New Testament Narrative","chapters":21,"order":43,"otnt":"NT","title_full":"The Gospel According to John","title_short":"John"},{"abbreviation":"Acts","category":"New Testament Narrative","chapters":28,"order":44,"otnt":"NT","title_full":"The Acts of the Apostles","title_short":"Acts"},{"abbreviation":"Rom.","category":"Pauline Epistles","chapters":16,"order":45,"otnt":"NT","title_full":"The Epistle of Paul to the Romans","title_short":"Romans"},{"abbreviation":"1 Cor.","category":"Pauline Epistles","chapters":16,"order":46,"otnt":"NT","title_full":"The First Epistle of Paul to the Corinthians","title_short":"1 Corinthians"},{"abbreviation":"2 Cor.","category":"Pauline Epistles","chapters":13,"order":47,"otnt":"NT","title_full":"The Second Epistle of Paul to the Corinthians","title_short":"2 Corinthians"},{"abbreviation":"Gal.","category":"Pauline Epistles","chapters":6,"order":48,"otnt":"NT","title_full":"The Epistle of Paul to the Galatians","title_short":"Galatians"},{"abbreviation":"Eph.","category":"Pauline Epistles","chapters":6,"order":49,"otnt":"NT","title_full":"The Epistle of Paul to the Ephesians","title_short":"Ephesians"},{"abbreviation":"Phil.","category":"Pauline Epistles","chapters":4,"order":50,"otnt":"NT","title_full":"The Epistle of Paul to the Philippians","title_short":"Philippians"},{"abbreviation":"Col.","category":"Pauline Epistles","chapters":4,"order":51,"otnt":"NT","title_full":"The Epistle of Paul to the Colossians","title_short":"Colossians"},{"abbreviation":"1 Thess.","category":"Pauline Epistles","chapters":5,"order":52,"otnt":"NT","title_full":"The First Epistle of Paul to the Thessalonians","title_short":"1 Thessalonians"},{"abbreviation":"2 Thess.","category":"Pauline Epistles","chapters":3,"order":53,"otnt":"NT","title_full":"The Second Epistle of Paul to the Thessalonians","title_short":"2 Thessalonians"},{"abbreviation":"1 Tim.","category":"Pauline Epistles","chapters":6,"order":54,"otnt":"NT","title_full":"The First Epistle of Paul to Timothy","title_short":"1 Timothy"},{"abbreviation":"2 Tim.","category":"Pauline Epistles","chapters":4,"order":55,"otnt":"NT","title_full":"The Second Epistle of Paul to Timothy","title_short":"2 Timothy"},{"abbreviation":"Titus","category":"Pauline Epistles","chapters":3,"order":56,"otnt":"NT","title_full":"The Epistle of Paul to the Titus","title_short":"Titus"},{"abbreviation":"Philem.","category":"Pauline Epistles","chapters":1,"order":57,"otnt":"NT","title_full":"The Epistle of Paul to the Philemon","title_short":"Philemon"},{"abbreviation":"Heb.","category":"General Epistles","chapters":13,"order":58,"otnt":"NT","title_full":"The Epistle to the Hebrews","title_short":"Hebrews"},{"abbreviation":"James","category":"General Epistles","chapters":5,"order":59,"otnt":"NT","title_full":"The General Epistle of James","title_short":"James"},{"abbreviation":"1 Pet.","category":"General Epistles","chapters":5,"order":60,"otnt":"NT","title_full":"The First Epistle of Peter","title_short":"1 Peter"},{"abbreviation":"2 Pet.","category":"General Epistles","chapters":3,"order":61,"otnt":"NT","title_full":"The Second Epistle of Peter","title_short":"2 Peter"},{"abbreviation":"1 John","category":"General Epistles","chapters":5,"order":62,"otnt":"NT","title_full":"The First Epistle of John","title_short":"1 John"},{"abbreviation":"2 John","category":"General Epistles","chapters":1,"order":63,"otnt":"NT","title_full":"The Second Epistle of John","title_short":"2 John"},{"abbreviation":"3 John","category":"General Epistles","chapters":1,"order":64,"otnt":"NT","title_full":"The Third Epistle of John","title_short":"3 John"},{"abbreviation":"Jude","category":"General Epistles","chapters":1,"order":65,"otnt":"NT","title_full":"The Epistle of Jude","title_short":"Jude"},{"abbreviation":"Rev.","category":"Apocalyptic Epistle","chapters":22,"order":66,"otnt":"NT","title_full":"The Book of Revelation","title_short":"Revelation"}]
+[
+  {
+    "abbreviation": "Gen.",
+    "category": "Law",
+    "chapters": 50,
+    "order": 1,
+    "otnt": "OT",
+    "title_full": "The First Book of Moses Called Genesis",
+    "title_short": "Genesis",
+    "verses": [31,25,24,26,32,22,24,22,29,32,32,20,18,24,21,16,27,33,38,18,34,24,20,67,34,35,46,22,35,43,55,32,20,31,29,43,36,30,23,23,57,38,34,34,28,34,31,22,33,26]
+  },
+  {
+    "abbreviation": "Ex.",
+    "category": "Law",
+    "chapters": 40,
+    "order": 2,
+    "otnt": "OT",
+    "title_full": "The Second Book of Moses Called Exodus",
+    "title_short": "Exodus",
+    "verses": [22,25,22,31,23,30,25,32,35,29,10,51,22,31,27,36,16,27,25,26,36,31,33,18,40,37,21,43,46,38,18,35,23,35,35,38,29,31,43,38]
+  },
+  {
+    "abbreviation": "Lev.",
+    "category": "Law",
+    "chapters": 27,
+    "order": 3,
+    "otnt": "OT",
+    "title_full": "The Third Book of Moses Called Leviticus",
+    "title_short": "Leviticus",
+    "verses": [17,16,17,35,19,30,38,36,24,20,47,8,59,57,33,34,16,30,37,27,24,33,44,23,55,46,34]
+  },
+  {
+    "abbreviation": "Num.",
+    "category": "Law",
+    "chapters": 36,
+    "order": 4,
+    "otnt": "OT",
+    "title_full": "The Fourth Book of Moses Called Numbers",
+    "title_short": "Numbers",
+    "verses": [54,34,51,49,31,27,89,26,23,36,35,16,33,45,41,50,13,32,22,29,35,41,30,25,18,65,23,31,40,16,54,42,56,29,34,13]
+
+  },
+  {
+    "abbreviation": "Deut.",
+    "category": "Law",
+    "chapters": 34,
+    "order": 5,
+    "otnt": "OT",
+    "title_full": "The Fifth Book of Moses Called Deuteronomy",
+    "title_short": "Deuteronomy",
+    "verses": [46,37,29,49,33,25,26,20,29,22,32,32,18,29,23,22,20,22,21,20,23,30,25,22,19,19,26,68,29,20,30,52,29,12]
+
+  },
+  {
+    "abbreviation": "Josh.",
+    "category": "Old Testament Narrative",
+    "chapters": 24,
+    "order": 6,
+    "otnt": "OT",
+    "title_full": "The Book of Joshua",
+    "title_short": "Joshua",
+    "verses": [18,24,17,24,15,27,26,35,27,43,23,24,33,15,63,10,18,28,51,9,45,34,16,33]
+
+  },
+  {
+    "abbreviation": "Judg.",
+    "category": "Old Testament Narrative",
+    "chapters": 21,
+    "order": 7,
+    "otnt": "OT",
+    "title_full": "The Book of Judges",
+    "title_short": "Judges",
+    "verses": [36,23,31,24,31,40,25,35,57,18,40,15,25,20,20,31,13,31,30,48,25]
+
+  },
+  {
+    "abbreviation": "Ruth",
+    "category": "Old Testament Narrative",
+    "chapters": 4,
+    "order": 8,
+    "otnt": "OT",
+    "title_full": "The Book of Ruth",
+    "title_short": "Ruth",
+    "verses": [22,23,18,22]
+
+  },
+  {
+    "abbreviation": "1 Sam.",
+    "category": "Old Testament Narrative",
+    "chapters": 31,
+    "order": 9,
+    "otnt": "OT",
+    "title_full": "The First Book of Samuel",
+    "title_short": "1 Samuel",
+    "verses": [28,36,21,22,12,21,17,22,27,27,15,25,23,52,35,23,58,30,24,42,15,23,29,22,44,25,12,25,11,31,13]
+
+  },
+  {
+    "abbreviation": "2 Sam.",
+    "category": "Old Testament Narrative",
+    "chapters": 24,
+    "order": 10,
+    "otnt": "OT",
+    "title_full": "The Second Book of Samuel",
+    "title_short": "2 Samuel",
+    "verses": [27,32,39,12,25,23,29,18,13,19,27,31,39,33,37,23,29,33,43,26,22,51,39,25]
+  },
+  {
+    "abbreviation": "1 Kings",
+    "category": "Old Testament Narrative",
+    "chapters": 22,
+    "order": 11,
+    "otnt": "OT",
+    "title_full": "The First Book of Kings",
+    "title_short": "1 Kings",
+    "verses": [53,46,28,34,18,38,51,66,28,29,43,33,34,31,34,34,24,46,21,43,29,53]
+
+  },
+  {
+    "abbreviation": "2 Kings",
+    "category": "Old Testament Narrative",
+    "chapters": 25,
+    "order": 12,
+    "otnt": "OT",
+    "title_full": "The Second Book of Kings",
+    "title_short": "2 Kings",
+    "verses": [18,25,27,44,27,33,20,29,37,36,21,21,25,29,38,20,41,37,37,21,26,20,37,20,30]
+
+  },
+  {
+    "abbreviation": "1 Chron.",
+    "category": "Old Testament Narrative",
+    "chapters": 29,
+    "order": 13,
+    "otnt": "OT",
+    "title_full": "The First Book of Chronicles",
+    "title_short": "1 Chronicles",
+    "verses": [54,55,24,43,26,81,40,40,44,14,47,40,14,17,29,43,27,17,19,8,30,19,32,31,31,32,34,21,30]
+
+  },
+  {
+    "abbreviation": "2 Chron.",
+    "category": "Old Testament Narrative",
+    "chapters": 36,
+    "order": 14,
+    "otnt": "OT",
+    "title_full": "The Second Book of Chronicles",
+    "title_short": "2 Chronicles",
+    "verses": [17,18,17,22,14,42,22,18,31,19,23,16,22,15,19,14,19,34,11,37,20,12,21,27,28,23,9,27,36,27,21,33,25,33,27,23]
+
+  },
+  {
+    "abbreviation": "Ezra",
+    "category": "Old Testament Narrative",
+    "chapters": 10,
+    "order": 15,
+    "otnt": "OT",
+    "title_full": "The Book of Ezra",
+    "title_short": "Ezra",
+    "verses": [11,70,13,24,17,22,28,36,15,44]
+
+  },
+  {
+    "abbreviation": "Neh.",
+    "category": "Old Testament Narrative",
+    "chapters": 13,
+    "order": 16,
+    "otnt": "OT",
+    "title_full": "The Book of Nehemiah",
+    "title_short": "Nehemiah",
+    "verses": [11,20,32,23,19,19,73,18,38,39,36,47,31]
+
+  },
+  {
+    "abbreviation": "Est.",
+    "category": "Old Testament Narrative",
+    "chapters": 10,
+    "order": 17,
+    "otnt": "OT",
+    "title_full": "The Book of Esther",
+    "title_short": "Esther",
+    "verses": [22,23,15,17,14,14,10,17,32,3]
+
+  },
+  {
+    "abbreviation": "Job",
+    "category": "Wisdom Literature",
+    "chapters": 42,
+    "order": 18,
+    "otnt": "OT",
+    "title_full": "The Book of Job",
+    "title_short": "Job",
+    "verses": [22,13,26,21,27,30,21,22,35,22,20,25,28,22,35,22,16,21,29,29,34,30,17,25,6,14,23,28,25,31,40,22,33,37,16,33,24,41,30,24,34,17]
+
+  },
+  {
+    "abbreviation": "Ps.",
+    "category": "Wisdom Literature",
+    "chapters": 150,
+    "order": 19,
+    "otnt": "OT",
+    "title_full": "The Book of Psalms",
+    "title_short": "Psalms",
+    "verses": [6,12,8,8,12,10,17,9,20,18,7,8,6,7,5,11,15,50,14,9,13,31,6,10,22,12,14,9,11,12,24,11,22,22,28,12,40,22,13,17,13,11,5,26,17,11,9,14,20,23,19,9,6,7,23,13,11,11,17,12,8,12,11,10,13,20,7,35,36,5,24,20,28,23,10,12,20,72,13,19,16,8,18,12,13,17,7,18,52,17,16,15,5,23,11,13,12,9,9,5,8,28,22,35,45,48,43,13,31,7,10,10,9,8,18,19,2,29,176,7,8,9,4,8,5,6,5,6,8,8,3,18,3,3,21,26,9,8,24,13,10,7,12,15,21,10,20,14,9,6]
+
+  },
+  {
+    "abbreviation": "Prov.",
+    "category": "Wisdom Literature",
+    "chapters": 31,
+    "order": 20,
+    "otnt": "OT",
+    "title_full": "The Book of Proverbs",
+    "title_short": "Proverbs",
+    "verses": [33,22,35,27,23,35,27,36,18,32,31,28,25,35,33,33,28,24,29,30,31,29,35,34,28,28,27,28,27,33,31]
+
+  },
+  {
+    "abbreviation": "Eccles.",
+    "category": "Wisdom Literature",
+    "chapters": 12,
+    "order": 21,
+    "otnt": "OT",
+    "title_full": "The Book of Ecclesiastes",
+    "title_short": "Ecclesiastes",
+    "verses": [18,26,22,16,20,12,29,17,18,20,10,14]
+
+  },
+  {
+    "abbreviation": "Song",
+    "category": "Wisdom Literature",
+    "chapters": 8,
+    "order": 22,
+    "otnt": "OT",
+    "title_full": "Song of Solomon",
+    "title_short": "Song of Solomon",
+    "verses": [17,17,11,16,16,13,13,14]
+
+  },
+  {
+    "abbreviation": "Isa.",
+    "category": "Major Prophets",
+    "chapters": 66,
+    "order": 23,
+    "otnt": "OT",
+    "title_full": "The Book of Isaiah",
+    "title_short": "Isaiah",
+    "verses": [31,22,26,6,30,13,25,22,21,34,16,6,22,32,9,14,14,7,25,6,17,25,18,23,12,21,13,29,24,33,9,20,24,17,10,22,38,22,8,31,29,25,28,28,25,13,15,22,26,11,23,15,12,17,13,12,21,14,21,22,11,12,19,12,25,24]
+
+  },
+  {
+    "abbreviation": "Jer.",
+    "category": "Major Prophets",
+    "chapters": 52,
+    "order": 24,
+    "otnt": "OT",
+    "title_full": "The Book of Jeremiah",
+    "title_short": "Jeremiah",
+    "verses": [19,37,25,31,31,30,34,22,26,25,23,17,27,22,21,21,27,23,15,18,14,30,40,10,38,24,22,17,32,24,40,44,26,22,19,32,21,28,18,16,18,22,13,30,5,28,7,47,39,46,64,34]
+
+  },
+  {
+    "abbreviation": "Lam.",
+    "category": "Major Prophets",
+    "chapters": 5,
+    "order": 25,
+    "otnt": "OT",
+    "title_full": "The Book of Lamentations",
+    "title_short": "Lamentations",
+    "verses": [22,22,66,22,22]
+
+  },
+  {
+    "abbreviation": "Ezek.",
+    "category": "Major Prophets",
+    "chapters": 48,
+    "order": 26,
+    "otnt": "OT",
+    "title_full": "The Book of Ezekiel",
+    "title_short": "Ezekiel",
+    "verses": [28,10,27,17,17,14,27,18,11,22,25,28,23,23,8,63,24,32,14,49,32,31,49,27,17,21,36,26,21,26,18,32,33,31,15,38,28,23,29,49,26,20,27,31,25,24,23,35]
+
+  },
+  {
+    "abbreviation": "Dan.",
+    "category": "Major Prophets",
+    "chapters": 12,
+    "order": 27,
+    "otnt": "OT",
+    "title_full": "The Book of Daniel",
+    "title_short": "Daniel",
+    "verses": [21,49,30,37,31,28,28,27,27,21,45,13]
+
+  },
+  {
+    "abbreviation": "Hos.",
+    "category": "Minor Prophets",
+    "chapters": 14,
+    "order": 28,
+    "otnt": "OT",
+    "title_full": "The Book of Hosea",
+    "title_short": "Hosea",
+    "verses": [11,23,5,19,15,11,16,14,17,15,12,14,16,9]
+
+  },
+  {
+    "abbreviation": "Joel",
+    "category": "Minor Prophets",
+    "chapters": 3,
+    "order": 29,
+    "otnt": "OT",
+    "title_full": "The Book of Joel",
+    "title_short": "Joel",
+    "verses": [20,32,21]
+
+  },
+  {
+    "abbreviation": "Amos",
+    "category": "Minor Prophets",
+    "chapters": 9,
+    "order": 30,
+    "otnt": "OT",
+    "title_full": "The Book of Amos",
+    "title_short": "Amos",
+    "verses": [15,16,15,13,27,14,17,14,15]
+
+  },
+  {
+    "abbreviation": "Obad.",
+    "category": "Minor Prophets",
+    "chapters": 1,
+    "order": 31,
+    "otnt": "OT",
+    "title_full": "The Book of Obadiah",
+    "title_short": "Obadiah",
+    "verses": [21]
+
+  },
+  {
+    "abbreviation": "Jonah",
+    "category": "Minor Prophets",
+    "chapters": 4,
+    "order": 32,
+    "otnt": "OT",
+    "title_full": "The Book of Jonah",
+    "title_short": "Jonah",
+    "verses": [17,10,10,11]
+
+  },
+  {
+    "abbreviation": "Mic.",
+    "category": "Minor Prophets",
+    "chapters": 7,
+    "order": 33,
+    "otnt": "OT",
+    "title_full": "The Book of Micah",
+    "title_short": "Micah",
+    "verses": [16,13,12,13,15,16,20]
+
+  },
+  {
+    "abbreviation": "Nah.",
+    "category": "Minor Prophets",
+    "chapters": 3,
+    "order": 34,
+    "otnt": "OT",
+    "title_full": "The Book of Nahum",
+    "title_short": "Nahum",
+    "verses": [15,13,19]
+
+  },
+  {
+    "abbreviation": "Hab.",
+    "category": "Minor Prophets",
+    "chapters": 3,
+    "order": 35,
+    "otnt": "OT",
+    "title_full": "The Book of Habakkuk",
+    "title_short": "Habakkuk",
+    "verses": [17,20,19]
+
+  },
+  {
+    "abbreviation": "Zeph.",
+    "category": "Minor Prophets",
+    "chapters": 3,
+    "order": 36,
+    "otnt": "OT",
+    "title_full": "The Book of Zephaniah",
+    "title_short": "Zephaniah",
+    "verses": [18,15,20]
+
+  },
+  {
+    "abbreviation": "Hag.",
+    "category": "Minor Prophets",
+    "chapters": 2,
+    "order": 37,
+    "otnt": "OT",
+    "title_full": "The Book of Haggai",
+    "title_short": "Haggai",
+    "verses": [15,23]
+
+  },
+  {
+    "abbreviation": "Zech.",
+    "category": "Minor Prophets",
+    "chapters": 14,
+    "order": 38,
+    "otnt": "OT",
+    "title_full": "The Book of Zechariah",
+    "title_short": "Zechariah",
+    "verses": [21,13,10,14,11,15,14,23,17,12,17,14,9,21]
+
+  },
+  {
+    "abbreviation": "Mal.",
+    "category": "Minor Prophets",
+    "chapters": 4,
+    "order": 39,
+    "otnt": "OT",
+    "title_full": "The Book of Malachi",
+    "title_short": "Malachi",
+    "verses": [14,17,18,6]
+  },
+  {
+    "abbreviation": "Matt.",
+    "category": "New Testament Narrative",
+    "chapters": 28,
+    "order": 40,
+    "otnt": "NT",
+    "title_full": "The Gospel According to Matthew",
+    "title_short": "Matthew",
+    "verses": [25,23,17,25,48,34,29,34,38,42,30,50,58,36,39,28,27,35,30,34,46,46,39,51,46,75,66,20]
+
+  },
+  {
+    "abbreviation": "Mark",
+    "category": "New Testament Narrative",
+    "chapters": 16,
+    "order": 41,
+    "otnt": "NT",
+    "title_full": "The Gospel According to Mark",
+    "title_short": "Mark",
+    "verses": [45,28,35,41,43,56,37,38,50,52,33,44,37,72,47,20]
+
+  },
+  {
+    "abbreviation": "Luke",
+    "category": "New Testament Narrative",
+    "chapters": 24,
+    "order": 42,
+    "otnt": "NT",
+    "title_full": "The Gospel According to Luke",
+    "title_short": "Luke",
+    "verses": [80,52,38,44,39,49,50,56,62,42,54,59,35,35,32,31,37,43,48,47,38,71,56,53]
+
+  },
+  {
+    "abbreviation": "John",
+    "category": "New Testament Narrative",
+    "chapters": 21,
+    "order": 43,
+    "otnt": "NT",
+    "title_full": "The Gospel According to John",
+    "title_short": "John",
+    "verses": [51,25,36,54,47,71,53,59,41,42,57,50,38,31,27,33,26,40,42,31,25]
+
+  },
+  {
+    "abbreviation": "Acts",
+    "category": "New Testament Narrative",
+    "chapters": 28,
+    "order": 44,
+    "otnt": "NT",
+    "title_full": "The Acts of the Apostles",
+    "title_short": "Acts",
+    "verses": [26,47,26,37,42,15,60,40,43,48,30,25,52,28,41,40,34,28,41,38,40,30,35,27,27,32,44,31]
+
+  },
+  {
+    "abbreviation": "Rom.",
+    "category": "Pauline Epistles",
+    "chapters": 16,
+    "order": 45,
+    "otnt": "NT",
+    "title_full": "The Epistle of Paul to the Romans",
+    "title_short": "Romans",
+    "verses": [32,29,31,25,21,23,25,39,33,21,36,21,14,23,33,27]
+  },
+  {
+    "abbreviation": "1 Cor.",
+    "category": "Pauline Epistles",
+    "chapters": 16,
+    "order": 46,
+    "otnt": "NT",
+    "title_full": "The First Epistle of Paul to the Corinthians",
+    "title_short": "1 Corinthians",
+    "verses": [31,16,23,21,13,20,40,13,27,33,34,31,13,40,58,24]
+  },
+  {
+    "abbreviation": "2 Cor.",
+    "category": "Pauline Epistles",
+    "chapters": 13,
+    "order": 47,
+    "otnt": "NT",
+    "title_full": "The Second Epistle of Paul to the Corinthians",
+    "title_short": "2 Corinthians",
+    "verses": [24,17,18,18,21,18,16,24,15,18,33,21,14]
+
+  },
+  {
+    "abbreviation": "Gal.",
+    "category": "Pauline Epistles",
+    "chapters": 6,
+    "order": 48,
+    "otnt": "NT",
+    "title_full": "The Epistle of Paul to the Galatians",
+    "title_short": "Galatians",
+    "verses": [24,21,29,31,26,18]
+
+  },
+  {
+    "abbreviation": "Eph.",
+    "category": "Pauline Epistles",
+    "chapters": 6,
+    "order": 49,
+    "otnt": "NT",
+    "title_full": "The Epistle of Paul to the Ephesians",
+    "title_short": "Ephesians",
+    "verses": [23,22,21,32,33,24]
+
+  },
+  {
+    "abbreviation": "Phil.",
+    "category": "Pauline Epistles",
+    "chapters": 4,
+    "order": 50,
+    "otnt": "NT",
+    "title_full": "The Epistle of Paul to the Philippians",
+    "title_short": "Philippians",
+    "verses": [30,30,21,23]
+
+  },
+  {
+    "abbreviation": "Col.",
+    "category": "Pauline Epistles",
+    "chapters": 4,
+    "order": 51,
+    "otnt": "NT",
+    "title_full": "The Epistle of Paul to the Colossians",
+    "title_short": "Colossians",
+    "verses": [29,23,25,18]
+
+  },
+  {
+    "abbreviation": "1 Thess.",
+    "category": "Pauline Epistles",
+    "chapters": 5,
+    "order": 52,
+    "otnt": "NT",
+    "title_full": "The First Epistle of Paul to the Thessalonians",
+    "title_short": "1 Thessalonians",
+    "verses": [10,20,13,18,28]
+
+  },
+  {
+    "abbreviation": "2 Thess.",
+    "category": "Pauline Epistles",
+    "chapters": 3,
+    "order": 53,
+    "otnt": "NT",
+    "title_full": "The Second Epistle of Paul to the Thessalonians",
+    "title_short": "2 Thessalonians",
+    "verses": [12,17,18]
+
+  },
+  {
+    "abbreviation": "1 Tim.",
+    "category": "Pauline Epistles",
+    "chapters": 6,
+    "order": 54,
+    "otnt": "NT",
+    "title_full": "The First Epistle of Paul to Timothy",
+    "title_short": "1 Timothy",
+    "verses": [20,15,16,16,25,21]
+
+  },
+  {
+    "abbreviation": "2 Tim.",
+    "category": "Pauline Epistles",
+    "chapters": 4,
+    "order": 55,
+    "otnt": "NT",
+    "title_full": "The Second Epistle of Paul to Timothy",
+    "title_short": "2 Timothy",
+    "verses": [18,26,17,22]
+
+  },
+  {
+    "abbreviation": "Titus",
+    "category": "Pauline Epistles",
+    "chapters": 3,
+    "order": 56,
+    "otnt": "NT",
+    "title_full": "The Epistle of Paul to the Titus",
+    "title_short": "Titus",
+    "verses": [16,15,15]
+
+  },
+  {
+    "abbreviation": "Philem.",
+    "category": "Pauline Epistles",
+    "chapters": 1,
+    "order": 57,
+    "otnt": "NT",
+    "title_full": "The Epistle of Paul to the Philemon",
+    "title_short": "Philemon",
+    "verses": [25]
+
+  },
+  {
+    "abbreviation": "Heb.",
+    "category": "General Epistles",
+    "chapters": 13,
+    "order": 58,
+    "otnt": "NT",
+    "title_full": "The Epistle to the Hebrews",
+    "title_short": "Hebrews",
+    "verses": [14,18,19,16,14,20,28,13,28,39,40,29,25]
+
+  },
+  {
+    "abbreviation": "James",
+    "category": "General Epistles",
+    "chapters": 5,
+    "order": 59,
+    "otnt": "NT",
+    "title_full": "The General Epistle of James",
+    "title_short": "James",
+    "verses": [27,26,18,17,20]
+
+  },
+  {
+    "abbreviation": "1 Pet.",
+    "category": "General Epistles",
+    "chapters": 5,
+    "order": 60,
+    "otnt": "NT",
+    "title_full": "The First Epistle of Peter",
+    "title_short": "1 Peter",
+    "verses": [25,25,22,19,14]
+
+  },
+  {
+    "abbreviation": "2 Pet.",
+    "category": "General Epistles",
+    "chapters": 3,
+    "order": 61,
+    "otnt": "NT",
+    "title_full": "The Second Epistle of Peter",
+    "title_short": "2 Peter",
+    "verses": [21,22,18]
+
+  },
+  {
+    "abbreviation": "1 John",
+    "category": "General Epistles",
+    "chapters": 5,
+    "order": 62,
+    "otnt": "NT",
+    "title_full": "The First Epistle of John",
+    "title_short": "1 John",
+    "verses": [10,29,24,21,21]
+
+  },
+  {
+    "abbreviation": "2 John",
+    "category": "General Epistles",
+    "chapters": 1,
+    "order": 63,
+    "otnt": "NT",
+    "title_full": "The Second Epistle of John",
+    "title_short": "2 John",
+    "verses": [13]
+
+  },
+  {
+    "abbreviation": "3 John",
+    "category": "General Epistles",
+    "chapters": 1,
+    "order": 64,
+    "otnt": "NT",
+    "title_full": "The Third Epistle of John",
+    "title_short": "3 John",
+    "verses": [14]
+
+  },
+  {
+    "abbreviation": "Jude",
+    "category": "General Epistles",
+    "chapters": 1,
+    "order": 65,
+    "otnt": "NT",
+    "title_full": "The Epistle of Jude",
+    "title_short": "Jude",
+    "verses": [25]
+
+  },
+  {
+    "abbreviation": "Rev.",
+    "category": "Apocalyptic Epistle",
+    "chapters": 22,
+    "order": 66,
+    "otnt": "NT",
+    "title_full": "The Book of Revelation",
+    "title_short": "Revelation",
+    "verses": [20,29,22,11,14,17,17,13,21,11,19,17,18,20,8,21,18,24,21,15,27,21]
+
+  }
+]
