@@ -12,15 +12,15 @@ export const listOfBooks: [api: string, short: string][] = BOOK_INFO.map(({ titl
 });
 
 export const getNoOfChapters = (book: number): number => {
-  const bookInfo = BOOK_INFO[book];
+  const bookInfo = BOOK_INFO[book - 1];
   if (!bookInfo) return NaN;
   return bookInfo.chapters;
 };
 
 export const getNoOfVerses = (book: number, chapter: number): number => {
-  const bookInfo = BOOK_INFO[book];
+  const bookInfo = BOOK_INFO[book - 1];
   if (!bookInfo) return NaN;
-  const chapterInfo = bookInfo.verses[chapter];
+  const chapterInfo = bookInfo.verses[chapter - 1];
   if (!chapterInfo) return NaN;
   return chapterInfo;
 };
