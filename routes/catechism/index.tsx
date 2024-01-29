@@ -8,6 +8,7 @@ import Catechism from "../../db/catechism.json" assert { type: "json" };
 import NavBar from "../../islands/NavBar.tsx";
 import Toolbar from "../../islands/Toolbar/Toolbar.tsx";
 import Resumer from "../../islands/super/Resumer.tsx";
+import Searcher from "@islands/Searcher.tsx";
 
 export default function CatechismHome(props: PageProps<ApiResponse>) {
   $isLoading.value = false;
@@ -17,6 +18,7 @@ export default function CatechismHome(props: PageProps<ApiResponse>) {
         <Resumer res={props.data} />
         <Toolbar />
         <TopFade />
+        <Searcher />
         <div
           role="feed"
           aria-busy="false"
