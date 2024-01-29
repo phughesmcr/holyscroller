@@ -39,10 +39,10 @@ export default function TranslationSelect() {
   };
 
   return (
-    <div className="w-3/12 min-w-[5ch]">
+    <div className="w-3/12 md:w-1/12 min-w-[5ch]">
       <Label htmlFor="translation-select">
-        <span className="truncate">
-          Trans.
+        <span className="sr-only">
+          Translation
         </span>
         <Select
           aria-label="Choose a bible translation"

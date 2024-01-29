@@ -47,8 +47,8 @@ export default function Searcher() {
       return;
     }
     const id = getIdFromString(
-      `${(Number(book) + 1).toString().padStart(2, "0")}${(Number(chapter) + 1).toString().padStart(3, "0")}${
-        (Number(verse) + 1).toString().padStart(3, "0")
+      `${(Number(book)).toString().padStart(2, "0")}${(Number(chapter)).toString().padStart(3, "0")}${
+        (Number(verse)).toString().padStart(3, "0")
       }`,
     );
     if (id === -1 || !id) {
@@ -61,29 +61,29 @@ export default function Searcher() {
     location.href = newUrl.toString();
   };
 
+  const handleChapterChange = useCallback((e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
+    const book = bookSelect.current?.value ?? 0;
+    const verses = getNoOfVerses(Number(book), Number(e.currentTarget.value));
+    const versesOptions = Array.from({ length: verses }, (_, i) => {
+      const option = document.createElement("option");
+      option.value = (i + 1).toString();
+      option.textContent = (i + 1).toString();
+      return option;
+    });
+    verseSelect.current?.replaceChildren(...versesOptions);
+  }, []);
+
   const handleBookChange = useCallback((e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
     const book = e.currentTarget.value;
     const chapters = getNoOfChapters(Number(book));
     const chaptersOptions: Node[] = Array.from({ length: chapters }, (_, i) => {
       const option = document.createElement("option");
-      option.value = i.toString();
+      option.value = (i + 1).toString();
       option.textContent = (i + 1).toString();
       return option;
     });
     chapterSelect.current?.replaceChildren(...chaptersOptions);
-  }, []);
-
-  const handleChapterChange = useCallback((e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
-    const book = bookSelect.current?.value ?? 0;
-    const verses = getNoOfVerses(Number(book) + 1, Number(e.currentTarget.value));
-    console.log(verses, Number(book) + 1, Number(e.currentTarget.value));
-    const versesOptions = Array.from({ length: verses }, (_, i) => {
-      const option = document.createElement("option");
-      option.value = i.toString();
-      option.textContent = (i + 1).toString();
-      return option;
-    });
-    verseSelect.current?.replaceChildren(...versesOptions);
+    handleChapterChange({ currentTarget: { value: 1 } } as unknown as JSX.TargetedEvent<HTMLSelectElement, Event>);
   }, []);
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export default function Searcher() {
 
   return (
     <>
-      <div id="searcher" className="absolute right-2 z-20 cursor-pointer">
+      <div id="searcher" className="absolute top-4 right-4 z-20 cursor-pointer">
         <button type="button" ref={buttonRef} onClick={showModal} className="bg-transparent">
           <IconSearch className="w-8 h-8" />
           <span className="sr-only">Search for Verse</span>
@@ -108,7 +108,7 @@ export default function Searcher() {
         <form method="dialog" className="flex flex-col gap-2 items-center justify-center">
           <label htmlFor="search">Search for Verse</label>
           <small>
-            E.g. <q>Ruth 1:16</q> or <q>43003016</q>
+            E.g. <q>John 3:16</q> or <q>2 Kings 7:1</q>
           </small>
           <input type="search" id="search" className="w-full" ref={inputRef} onSearch={handleSearch} />
           <button
@@ -131,8 +131,8 @@ export default function Searcher() {
               ref={bookSelect}
               onChange={handleBookChange}
             >
-              {Array.from({ length: 66 }, (_, i) => (
-                <option key={i} value={i}>
+              {Array.from({ length: listOfBooks.length }, (_, i) => (
+                <option key={i} value={i + 1}>
                   {listOfBooks[i][1]}
                 </option>
               ))}
