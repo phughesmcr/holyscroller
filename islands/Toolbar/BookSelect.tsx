@@ -18,7 +18,7 @@ export default function BookSelect() {
 
   const updateSelection = (book: number) => {
     if (!selectRef.current) return;
-    const title = listOfBooks[book - 1][1];
+    const title = listOfBooks[book - 1][0];
     selectedBook.value = title;
     selectRef.current.value = title;
   };
