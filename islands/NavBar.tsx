@@ -35,11 +35,10 @@ export default function NavBar() {
   });
 
   return (
-    <div className="min-w-0 min-h-0 w-full h-full">
+    <div className="min-w-0 min-h-0 w-full h-full z-10">
       <nav
         role="navigation"
         aria-label="Quick links"
-        aria-orientation="horizontal"
         className="flex flex-row justify-around items-center p-1 gap-1 touch-none overflow-hidden h-full w-full max-w-full max-h-full bg-zinc-700 dark:bg-zinc-900 text-zinc-100"
       >
         <NavButton

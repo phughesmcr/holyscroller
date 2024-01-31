@@ -2,7 +2,7 @@ import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Label } from "@components/Label.tsx";
 import { Select } from "@components/Select.tsx";
 import { API_DEFAULT_TRANSLATION, LINK_CANONICAL, SQ_KEYS, TRANSLATIONS } from "@lib/constants.ts";
-import { $currentParams, $currentUrl } from "@lib/state.ts";
+import { $currentParams, $currentTranslation, $currentUrl } from "@lib/state.ts";
 import { effect, useSignal } from "@preact/signals";
 import { escapeSql } from "escape";
 import type { JSX } from "preact";
@@ -15,7 +15,7 @@ export default function TranslationSelect() {
   const selectRef = useRef<HTMLSelectElement>(null);
 
   effect(() => {
-    const translation = $currentParams.value?.translation || API_DEFAULT_TRANSLATION;
+    const translation = $currentParams.value?.translation || $currentTranslation.value || API_DEFAULT_TRANSLATION;
     if (selectRef.current) {
       selectedTranslation.value = translation;
       selectRef.current.value = translation;
@@ -23,7 +23,7 @@ export default function TranslationSelect() {
   });
 
   useEffect(() => {
-    const translation = $currentParams.value?.translation || API_DEFAULT_TRANSLATION;
+    const translation = $currentParams.value?.translation || $currentTranslation.value || API_DEFAULT_TRANSLATION;
     if (selectRef.current) {
       selectedTranslation.value = translation;
       selectRef.current.value = translation;
@@ -31,10 +31,13 @@ export default function TranslationSelect() {
   }, []);
 
   const changeTranslation = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
+    if (!selectRef.current) return;
     const res = new URL($currentUrl.peek() ?? location?.href ?? LINK_CANONICAL);
     const selection = escapeSql(e.currentTarget.value);
     res.searchParams.set(SQ_KEYS.TRANSLATION, selection);
     $currentUrl.value = res;
+    selectedTranslation.value = selection;
+    selectRef.current.value = selection;
     location.href = res.toString();
   };
 

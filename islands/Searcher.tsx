@@ -97,7 +97,7 @@ export default function Searcher() {
 
   return (
     <>
-      <div id="searcher" className="absolute top-4 right-4 z-20 cursor-pointer">
+      <div id="searcher" className="absolute top-4 right-4 z-20 cursor-pointer w-9 h-9">
         <button type="button" ref={buttonRef} onClick={showModal} className="bg-transparent">
           <IconSearch className="w-8 h-8" />
           <span className="sr-only">Search for Verse</span>
@@ -121,9 +121,10 @@ export default function Searcher() {
         </form>
 
         <form method="dialog" className="flex flex-col gap-2 items-center justify-center my-2">
-          <label>Go To Verse</label>
+          <label htmlFor="bookGoto">Go To Verse</label>
           <div className="flex gap-2">
             <select
+              id="bookGoto"
               name="bookGoto"
               aria-label="Book"
               title="Book"

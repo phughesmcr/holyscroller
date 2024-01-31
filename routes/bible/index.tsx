@@ -56,13 +56,13 @@ export default function Bible(props: PageProps<ApiResponse>) {
   return (
     <AppContainer>
       <main role="main" className="min-w-0 min-h-0 w-full h-full" f-client-nav>
-        <Resumer res={data} />
+        <Resumer origin={data.origin} resume={data.resume} />
         <TopFade />
         <Toolbar />
         <Searcher />
         <div
           role="feed"
-          aria-busy={$isLoading.value}
+          aria-busy={$isLoading}
           className="w-full h-full overflow-x-hidden overflow-y-auto hide-scrollbars touch-pan-y snap-y snap-mandatory p-2 overscroll-touch"
         >
           <Partial name="carousel" mode="append">
