@@ -1,7 +1,5 @@
 import { asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
-import Loader from "../islands/super/Loader.tsx";
-import Onboarding from "../islands/super/Onboarding.tsx";
 import {
   APP_NAME,
   APP_TAGLINE,
@@ -17,6 +15,8 @@ import {
   META_THEME_COLOR,
   META_VIEWPORT,
 } from "@lib/constants.ts";
+import Loader from "../islands/super/Loader.tsx";
+import Onboarding from "../islands/super/Onboarding.tsx";
 
 export default function App({ Component }: PageProps) {
   return (
@@ -90,7 +90,7 @@ export default function App({ Component }: PageProps) {
         <link rel="stylesheet" href={asset("/styles.css")} />
         <link
           rel="stylesheet"
-          href={"https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700;800&display=swap"}
+          href={"https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap"}
         />
 
         <script type="application/ld+json">

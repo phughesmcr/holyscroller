@@ -18,7 +18,8 @@ html, body {
   min-height: 100%;
   max-width: 100lvw;
   max-height: 100lvh;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', Avenir, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+  font-weight: normal;
 }
 body {
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);

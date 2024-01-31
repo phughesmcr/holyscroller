@@ -62,7 +62,7 @@ export default function Bible(props: PageProps<ApiResponse>) {
         <Searcher />
         <div
           role="feed"
-          aria-busy={$isLoading.value}
+          aria-busy={$isLoading}
           className="w-full h-full overflow-x-hidden overflow-y-auto hide-scrollbars touch-pan-y snap-y snap-mandatory p-2 overscroll-touch"
         >
           <Partial name="carousel" mode="append">

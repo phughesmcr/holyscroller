@@ -35,7 +35,6 @@ export default function Onboarding() {
       aria-hidden={$isOnboard}
       role="dialog"
       aria-label="Scroll up to get started!"
-      aria-description="Interact to dismiss this screen and get started."
       className="pointer-events-auto z-50 flex isolate absolute top-0 left-0 flex-col items-center justify-center w-full h-full bg-zinc-100 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-100 opacity-80 touch-manipulation"
       onTouchStart={toggleIsOnboard}
       onPointerDown={toggleIsOnboard}
