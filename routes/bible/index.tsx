@@ -56,7 +56,7 @@ export default function Bible(props: PageProps<ApiResponse>) {
   return (
     <AppContainer>
       <main role="main" className="min-w-0 min-h-0 w-full h-full" f-client-nav>
-        <Resumer res={data} />
+        <Resumer origin={data.origin} resume={data.resume} />
         <TopFade />
         <Toolbar />
         <Searcher />
