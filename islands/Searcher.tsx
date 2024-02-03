@@ -34,6 +34,7 @@ export default function Searcher() {
     }
     closeModal();
     const newUrl = deleteInessentialsFromUrl($currentUrl.peek() ?? location?.href ?? LINK_CANONICAL);
+    newUrl.pathname = "/bible";
     newUrl.searchParams.set(SQ_KEYS.START_FROM, id.toString());
     location.href = newUrl.toString();
   };
@@ -57,6 +58,7 @@ export default function Searcher() {
     }
     closeModal();
     const newUrl = deleteInessentialsFromUrl($currentUrl.peek() ?? location?.href ?? LINK_CANONICAL);
+    newUrl.pathname = "/bible";
     newUrl.searchParams.set(SQ_KEYS.START_FROM, id.toString());
     location.href = newUrl.toString();
   };
