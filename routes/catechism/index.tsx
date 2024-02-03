@@ -1,19 +1,14 @@
 import { Partial } from "$fresh/runtime.ts";
-import type { PageProps } from "$fresh/server.ts";
 import { TopFade } from "@components/TopFade.tsx";
 import Searcher from "@islands/Searcher.tsx";
 import { $isLoading } from "@lib/state.ts";
-import type { ApiResponse } from "@lib/types.ts";
 import { useEffect } from "preact/hooks";
 import AppContainer from "../../components/AppContainer.tsx";
 import Catechism from "../../db/catechism.json" assert { type: "json" };
 import NavBar from "../../islands/NavBar.tsx";
 import Toolbar from "../../islands/Toolbar/Toolbar.tsx";
-import Resumer from "../../islands/super/Resumer.tsx";
 
-export default function CatechismHome(props: PageProps<ApiResponse>) {
-  const { data } = props;
-
+export default function CatechismHome() {
   useEffect(() => {
     $isLoading.value = false;
   }, []);
@@ -21,7 +16,6 @@ export default function CatechismHome(props: PageProps<ApiResponse>) {
   return (
     <AppContainer>
       <main role="main" className="min-w-0 min-h-0 w-full h-full" f-client-nav>
-        <Resumer origin={data.origin} resume={data.resume} />
         <Toolbar />
         <TopFade />
         <Searcher />
