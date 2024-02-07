@@ -64,6 +64,9 @@ export default function App({ Component }: PageProps) {
         <meta name="twitter:title" content={`${APP_NAME} | ${APP_TAGLINE}`} />
         <meta name="twitter:description" content={META_DESCRIPTION} />
         <meta name="twitter:image:src" content={asset(`${LINK_CANONICAL}/img/card.png`)} />
+        <meta name="twitter:domain" content="holyscroller.app" />
+        <meta name="twitter:url" content={LINK_CANONICAL} />
+        <meta name="twitter:creator" content="@peterhughesmcr" />
 
         <link rel="apple-touch-icon" sizes="57x57" href={asset("img/apple-icon-57x57.png")} />
         <link rel="apple-touch-icon" sizes="60x60" href={asset("img/apple-icon-60x60.png")} />
