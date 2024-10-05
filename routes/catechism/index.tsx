@@ -4,7 +4,7 @@ import Searcher from "@islands/Searcher.tsx";
 import { $isLoading } from "@lib/state.ts";
 import { useEffect } from "preact/hooks";
 import AppContainer from "../../components/AppContainer.tsx";
-import Catechism from "../../db/catechism.json" assert { type: "json" };
+import Catechism from "../../db/catechism.json" with { type: "json" };
 import NavBar from "../../islands/NavBar.tsx";
 import Toolbar from "../../islands/Toolbar/Toolbar.tsx";
 
