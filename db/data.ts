@@ -1,9 +1,9 @@
 import { API_MAX_BOOK_ID } from "@lib/constants.ts";
 import { Pericope, VerseId } from "@lib/types.ts";
 import { getRefFromId, memoizeWithLimitedHistory } from "@lib/utils.ts";
-import BOOK_INFO from "./book_info.json" assert { type: "json" };
-import BOOK_TITLES from "./book_titles.json" assert { type: "json" };
-import PERICOPES from "./pericopes.json" assert { type: "json" };
+import BOOK_INFO from "./book_info.json" with { type: "json" };
+import BOOK_TITLES from "./book_titles.json" with { type: "json" };
+import PERICOPES from "./pericopes.json" with { type: "json" };
 
 const bookTitleEntries = Object.entries(BOOK_TITLES);
 

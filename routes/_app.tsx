@@ -51,14 +51,11 @@ export default function App({ Component }: PageProps) {
         <meta property="og:description" content={META_DESCRIPTION} />
         <meta property="og:url" content={LINK_CANONICAL} />
         <meta property="og:image" content={asset(`${LINK_CANONICAL}/img/android-icon-512x512.png`)} />
-        <meta property="og:image:secure_url" content={asset(`${LINK_CANONICAL}/img/android-icon-512x512.png`)} />
+
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="512" />
         <meta property="og:image:height" content="512" />
-        <meta
-          property="og:image:alt"
-          content="The logo for HolyScroller - an open bible with a cross emerging from the pages."
-        />
+        <meta property="og:image:alt" content="" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${APP_NAME} | ${APP_TAGLINE}`} />

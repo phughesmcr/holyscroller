@@ -21,8 +21,8 @@ export default function Carousel({ res }: CarouselProps) {
   const {
     extras,
     next,
-    pageSize = API_DEFAULT_PAGE_SIZE,
-    resume = false,
+    // pageSize = API_DEFAULT_PAGE_SIZE,
+    // resume = false,
     translation = API_DEFAULT_TRANSLATION,
     verses = [],
   } = res;
