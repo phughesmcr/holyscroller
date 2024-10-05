@@ -29,9 +29,6 @@
       "tags": [
         "fresh",
         "recommended"
-      ],
-      "exclude": [
-        "no-import-assertions"
       ]
     }
   },
