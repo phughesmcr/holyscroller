@@ -18,7 +18,7 @@ html, body {
   min-height: 100%;
   max-width: 100lvw;
   max-height: 100lvh;
-  font-family: 'Montserrat', Avenir, Corbel, 'URW Gothic', source-sans-pro, sans-serif;
+  font-family: "Montserrat", Avenir, Corbel, "URW Gothic", source-sans-pro, sans-serif;
   font-weight: normal;
 }
 body {
@@ -30,7 +30,7 @@ body {
   grid-template-rows: 1fr var(--navbar-height);
   grid-template-areas:
     "main"
-    "nav"
+    "nav";
 }
 #inner-container main {
   grid-area: main;
@@ -153,9 +153,15 @@ article.ui.catechism small {
   -ms-overflow-style: none;
 }
 @keyframes moveUp {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 .flag-icon {
   font-family: monospace;
@@ -165,8 +171,8 @@ article.ui.catechism small {
   visibility: hidden;
 }
 /* Give links pointing to the current page a green color */
-a[aria-current='page'] {
-  color:#a5f3fc;
+a[aria-current="page"] {
+  color: #a5f3fc;
 }
 .overscroll-touch {
   -webkit-overflow-scrolling: touch;
@@ -176,7 +182,7 @@ a[aria-current='page'] {
   bottom: calc(var(--navbar-height) + 1rem);
 }
 .modal::backdrop {
-  background-color: rgba(0 , 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
