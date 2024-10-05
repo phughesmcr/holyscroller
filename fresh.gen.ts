@@ -14,15 +14,12 @@ import * as $partials_feed from "./routes/partials/feed.tsx";
 import * as $Carousel from "./islands/Carousel.tsx";
 import * as $NavBar from "./islands/NavBar.tsx";
 import * as $Searcher from "./islands/Searcher.tsx";
-import * as $Toolbar_BookSelect from "./islands/Toolbar/BookSelect.tsx";
-import * as $Toolbar_PericopeSelect from "./islands/Toolbar/PericopeSelect.tsx";
 import * as $Toolbar_Toolbar from "./islands/Toolbar/Toolbar.tsx";
 import * as $Toolbar_TranslationSelect from "./islands/Toolbar/TranslationSelect.tsx";
-import * as $super_Fab from "./islands/super/Fab.tsx";
 import * as $super_Loader from "./islands/super/Loader.tsx";
 import * as $super_Onboarding from "./islands/super/Onboarding.tsx";
 import * as $super_Resumer from "./islands/super/Resumer.tsx";
-import { type Manifest } from "$fresh/server.ts";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
@@ -40,11 +37,8 @@ const manifest = {
     "./islands/Carousel.tsx": $Carousel,
     "./islands/NavBar.tsx": $NavBar,
     "./islands/Searcher.tsx": $Searcher,
-    "./islands/Toolbar/BookSelect.tsx": $Toolbar_BookSelect,
-    "./islands/Toolbar/PericopeSelect.tsx": $Toolbar_PericopeSelect,
     "./islands/Toolbar/Toolbar.tsx": $Toolbar_Toolbar,
     "./islands/Toolbar/TranslationSelect.tsx": $Toolbar_TranslationSelect,
-    "./islands/super/Fab.tsx": $super_Fab,
     "./islands/super/Loader.tsx": $super_Loader,
     "./islands/super/Onboarding.tsx": $super_Onboarding,
     "./islands/super/Resumer.tsx": $super_Resumer,
