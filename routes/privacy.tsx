@@ -1,0 +1,40 @@
+const PRIVACY_POLICY = `
+# Privacy Policy for HolyScroller
+Last updated: April 4, 2025
+
+##No Personal Data Collection
+HolyScroller does not collect any personal information from users. Personal data includes information such as your name, email address, phone number, contact lists, location data, or any other details that can identify you. The app does not gather, store, or transmit any such data – not even device identifiers or IP addresses. Because we collect no personal data, we also do not use, share, or sell any personal information for any purpose.
+
+## No Device Permissions Required
+Our app does not request any special device permissions. We do not ask for access to your camera, microphone, photos, location, contacts, health data, or any other sensitive device information. Since no permissions are needed, the app cannot access your personal files or device features, ensuring your privacy is fully protected by design.
+
+## No Third-Party Services
+HolyScroller does not use any third-party services that collect data. We have no analytics trackers, no advertising networks, and no third-party crash reporting SDKs integrated into the app. This means the app does not send any information to external servers or companies. Your usage of the app is not monitored or analyzed by us or by any third-party provider.
+
+## Offline Functionality
+Our app works completely offline. An internet connection is not required to use any of HolyScroller’s features. The app does not connect to any server or cloud service, so no data leaves your device. All content and interactions stay on your device, providing you with full privacy and security while using the app.
+
+## No User Accounts or Forms
+We do not require you to create an account or log in to use HolyScroller. There are no registration forms, login screens, or data entry forms of any kind in the app. You will never be asked to provide personal details (such as name, age, email, etc.) to use the app’s functionality. There is also no optional user interaction that involves entering or submitting data. In short, the app operates without any user-provided information.
+
+## Children’s Privacy
+HolyScroller is intended for a general audience and is not directed to children under the age of 13. We do not knowingly collect personal information from anyone, including children. Since the app collects no data at all from users, it is not subject to the Children’s Online Privacy Protection Act (COPPA) or similar laws designed to protect children’s privacy. If you are a parent or guardian and believe your child may have provided any personal information (which our app does not request), you can contact us, and we will ensure that no such data exists or is promptly deleted.
+
+## Changes to This Policy
+We may update this Privacy Policy in the future if our practices change (for example, if we introduce new features that involve data). Any changes will be posted here, with an updated revision date at the top of the policy. We encourage you to review this policy periodically. Continued use of the app after any changes signifies your acceptance of the updated policy.
+
+## Contact Us
+If you have any questions or concerns about this Privacy Policy or about privacy in HolyScroller in general, please feel free to contact us. You can reach out via email at support@holyscroller.app or through the contact information provided on our official website. We value your privacy and will address any issues to the best of our ability.
+`;
+
+export default function Privacy() {
+  return <div class="p-4">{PRIVACY_POLICY.split("\n").map((line, i) => {
+    if (line.startsWith("##")) {
+      return <h2 class="text-2xl font-bold" key={i}>{line.slice(2)}</h2>;
+    } else if (line.startsWith("#")) {
+      return <h1 class="text-3xl font-bold" key={i}>{line.slice(1)}</h1>;
+    } else {
+      return <p key={i}>{line}</p>;
+    }
+  })}</div>;
+}

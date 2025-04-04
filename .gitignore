@@ -7,12 +7,5 @@
 
 # Fresh build directory
 _fresh/
-
-# kv files
-*.db-*
-
 # npm dependencies
 node_modules/
-
-# temporary files
-scratch/

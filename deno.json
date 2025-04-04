@@ -1,27 +1,12 @@
 {
-  "exclude": [
-    ".git/**/*",
-    ".github/**/*",
-    ".vscode/**/*",
-    "**/_fresh/**/*",
-    "**/scratch/**/*",
-    "**/*.json",
-    "**/*.jsonc",
-    "**/*.md",
-    "**/_fresh/*"
-  ],
   "lock": false,
-  "fmt": {
-    "lineWidth": 120
-  },
   "tasks": {
-    "clean": "npx rimraf ./_fresh",
-    "check": "deno fmt --check && deno lint && deno check --unstable-kv dev.ts",
-    "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable-kv -A -",
+    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+    "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
     "manifest": "deno task cli manifest $(pwd)",
-    "start": "deno run -A --unstable-kv --watch=static/,routes/ dev.ts",
-    "build": "deno run -A --unstable-kv dev.ts build",
-    "preview": "deno run -A --unstable-kv main.ts",
+    "start": "deno run -A --watch=static/,routes/ dev.ts",
+    "build": "deno run -A dev.ts build",
+    "preview": "deno run -A main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "lint": {
@@ -32,41 +17,23 @@
       ]
     }
   },
+  "exclude": [
+    "**/_fresh/*"
+  ],
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@1.7.2/",
-    "preact": "https://esm.sh/preact@10.24.1",
-    "preact/": "https://esm.sh/preact@10.24.1/",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.3.0",
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.8.0",
-    "tailwindcss": "npm:tailwindcss@3.4.13",
-    "tailwindcss/": "npm:/tailwindcss@3.4.13/",
-    "tailwindcss/plugin": "npm:/tailwindcss@3.4.13/plugin.js",
-    "@tailwindcss/forms": "npm:@tailwindcss/forms@0.5.9",
-    "$std/": "https://deno.land/std@0.224.0/",
-    "escape": "https://deno.land/x/escape@1.4.2/mod.ts",
-    "icons/": "https://deno.land/x/tabler_icons_tsx@0.0.7/tsx/",
-    "@components/": "./components/",
-    "@db": "./db/db.ts",
-    "@data": "./db/data.ts",
-    "@islands/": "./islands/",
-    "@lib/": "./lib/",
-    "@static/": "./static/"
+    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "preact": "https://esm.sh/preact@10.22.0",
+    "preact/": "https://esm.sh/preact@10.22.0/",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
+    "tailwindcss": "npm:tailwindcss@3.4.1",
+    "tailwindcss/": "npm:/tailwindcss@3.4.1/",
+    "tailwindcss/plugin": "npm:/tailwindcss@3.4.1/plugin.js",
+    "$std/": "https://deno.land/std@0.216.0/"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "nodeModulesDir": "auto",
-  "deploy": {
-    "project": "7a27ec5c-40ee-4c1c-988b-63d476d01c6b",
-    "exclude": [
-      "**/db/**/*.db"
-    ],
-    "include": [],
-    "entrypoint": "main.ts"
-  },
-  "githooks": {
-    "$schema": "https://deno.land/x/githooks/schema.json",
-    "pre-commit": "check"
-  }
+  "nodeModulesDir": true
 }

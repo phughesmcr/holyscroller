@@ -1,7 +1,6 @@
 {
   "deno.enable": true,
   "deno.lint": true,
-  "deno.unstable": true,
   "editor.defaultFormatter": "denoland.vscode-deno",
   "[typescriptreact]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
@@ -17,34 +16,5 @@
   },
   "css.customData": [
     ".vscode/tailwind.json"
-  ],
-  "editor.rulers": [
-    120
-  ],
-  "cSpell.words": [
-    "BBCCCVVV",
-    "BCCCVVV",
-    "BOOKINFO",
-    "callout",
-    "compat",
-    "crossrefs",
-    "Deno",
-    "endregion",
-    "Ephes",
-    "Jdgs",
-    "Judg",
-    "msapplication",
-    "otnt",
-    "overscroll",
-    "PERICOPES",
-    "phugh",
-    "preact",
-    "Pslm",
-    "Qoheleth",
-    "shortlink",
-    "tailwindcss",
-    "Thes",
-    "tiktok"
-  ],
-  "editor.formatOnSave": true
+  ]
 }
